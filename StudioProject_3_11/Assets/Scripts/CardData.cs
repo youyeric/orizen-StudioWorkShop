@@ -12,5 +12,5 @@ public class CardData : MonoBehaviour
     {
       
     }
-
+    
 }
