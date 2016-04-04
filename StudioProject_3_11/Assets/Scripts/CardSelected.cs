@@ -27,8 +27,8 @@ public class CardSelected : MonoBehaviour {
         {
             float Xposition = this.gameObject.GetComponent<RectTransform>().anchoredPosition.x;
             whatCardwantoDo = uic.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 200, 200, Xposition, 0, "MessageBox");
-            setCardButton = uic.createButton("set", GameObject.Find("whatCardwantoDo").gameObject.transform, 0, 53, 160, 50, "放置", 30, Color.white, "button").GetComponent<Button>();
-            setCardButton.onClick.AddListener(delegate { setCardButtonScript(); });
+            setCardButton = uic.createButton("set", GameObject.Find("whatCardwantoDo").gameObject.transform, new Vector2(0, 53), new Vector2(160, 50), "放置", 30, Color.white, "button", delegate { setCardButtonScript();}).GetComponent<Button>();
+            
             isCardSeleted = true;
         }
         else

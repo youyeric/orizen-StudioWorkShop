@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameProcessControll{
     private int round;
     private int stage;
     private MyCard mcard;
-    public Transform handCard, Ground;
     private int handcardposition;
     private int cardpositionNum;
     private UICreator ViewUI;
+    private int cardQuantity;
+    private string setCardQuantitySt;
     public GameProcessControll(MyCard m,UICreator UI)
     {
         this.round = 0;
@@ -18,8 +20,9 @@ public class GameProcessControll{
         this.ViewUI = UI;
         this.handcardposition = 0;
         this.cardpositionNum = 600 / 5;
-        initial();
+        this.cardQuantity = 40;
         
+        initial();       
     }
     void initial()
     {
@@ -32,7 +35,8 @@ public class GameProcessControll{
            
             changePosition();
         }
-        
+        ViewUI.createButton("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(300, -185), new Vector2(63, 108), cardQuantity.ToString(), 40, new Color(1, 1, 1), "wolf", delegate { drawCard(); });
+       
         //handCard = s;
         round++;
         //UI家五張卡
@@ -60,5 +64,8 @@ public class GameProcessControll{
             handcardposition = cardpositionNum - handcardposition;
         }
     }
-  
+    public void drawCard() {
+        cardQuantity--;
+        GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
+    }
 }

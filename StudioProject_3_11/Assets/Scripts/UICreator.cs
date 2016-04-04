@@ -94,7 +94,7 @@ public class UICreator : MonoBehaviour {
 
         return textObject;
     }
-    public GameObject createButton(string buttonObjectName,Transform tr, float x, float y, float w, float h, string message, int fontS, Color fontC, string imgName)
+    public GameObject createButton(string buttonObjectName,Transform tr, Vector2 position, Vector2 size, string message, int fontS, Color fontC, string imgName, UnityAction eventListner)
     {
         GameObject buttonObject = new GameObject(buttonObjectName);
         buttonObject.transform.SetParent(tr);
@@ -102,9 +102,9 @@ public class UICreator : MonoBehaviour {
         buttonObject.layer = 5;
 
         RectTransform buttonTranRect = buttonObject.AddComponent<RectTransform>();
-        SetSize(buttonTranRect, new Vector2(w, h));
+        SetSize(buttonTranRect, size);
         //buttonTranRect.anchoredPosition3D = new Vector3(0, 0, 0);
-        buttonTranRect.anchoredPosition = new Vector2(x, y);
+        buttonTranRect.anchoredPosition = position;
         buttonTranRect.anchorMin = new Vector2(0.5f, 0.5f);
         buttonTranRect.anchorMax = new Vector2(0.5f, 0.5f);
         buttonTranRect.pivot = new Vector2(0.5f, 0.5f);
@@ -117,9 +117,10 @@ public class UICreator : MonoBehaviour {
         Texture2D tex = Resources.Load<Texture2D>(imgName);
         image.sprite = Sprite.Create(tex, new Rect(0,0,tex.width, tex.height), new Vector2(0.5f, 0.5f));
 
-        GameObject textObject = createText(buttonObjectName+"Text",buttonObject.transform, 0, 0, w, h, message, fontS, fontC);
+        GameObject textObject = createText(buttonObjectName+"Text",buttonObject.transform, 0, 0, size.x, size.y, message, fontS, fontC);
 
         Button btn = buttonObject.AddComponent<Button>();
+        btn.onClick.AddListener(eventListner);
 
         return buttonObject;
     }

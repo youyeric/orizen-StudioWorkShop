@@ -15,8 +15,7 @@ public class CreateTile : MonoBehaviour {
         uic = new UICreator(5);
         // GameObject.FindObjectOfType<Canvas>().gameObject.transform 畫布的Transform
         // GameObject.Find("名字").gameObject.transform 依據名字尋找物件
-        uic.createImage("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(63, 108), new Vector2(300, -185), "wolf");
-        uic.createText("DeckText", GameObject.Find("DeckImg").gameObject.transform, 0, 0, 49, 84, "40", 40, new Color(1, 1, 1));
+       
         GameObject tiles = new GameObject("Tiles");
         GameObject tileEdges = new GameObject("TileEdges");
         
