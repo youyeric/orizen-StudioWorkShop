@@ -162,7 +162,7 @@ public class UICreator : MonoBehaviour {
         RectTransform cardScope = card.AddComponent<RectTransform>();
         cardScope.anchorMin = new Vector2(0.5f, 0.5f);
         cardScope.anchorMax = new Vector2(0.5f, 0.5f);
-        cardScope.pivot = new Vector2(0.5f, 0.5f);
+        cardScope.pivot = new Vector2(0, 0.5f);
         cardScope.sizeDelta = size;
         cardScope.anchoredPosition = position;
         cardScope.localScale = new Vector3(1.0f, 1.0f, 1.0f);

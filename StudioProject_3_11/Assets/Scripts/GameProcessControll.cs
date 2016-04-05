@@ -11,7 +11,7 @@ public class GameProcessControll{
     private int cardpositionNum;
     private UICreator ViewUI;
     private int cardQuantity;
-    private string setCardQuantitySt;
+    private int cardOnHand;
     public GameProcessControll(MyCard m,UICreator UI)
     {
         this.round = 0;
@@ -19,7 +19,8 @@ public class GameProcessControll{
         this.mcard = m;
         this.ViewUI = UI;
         this.handcardposition = 0;
-        this.cardpositionNum = 600 / 5;
+        this.cardOnHand = 5;
+        this.cardpositionNum = 600 / cardOnHand;
         this.cardQuantity = 40;
         
         initial();       
@@ -31,9 +32,10 @@ public class GameProcessControll{
         var s = mcard.getCard(1);
         for(int i = 0; i < 5; i++)
         {
-            GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(handcardposition - 100, 0), "wolf", s);
-           
-            changePosition();
+            handcardposition += cardpositionNum;
+            GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0), "wolf", s);
+            
+            //changePosition();
         }
         ViewUI.createButton("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(300, -185), new Vector2(63, 108), cardQuantity.ToString(), 40, new Color(1, 1, 1), "wolf", delegate { drawCard(); });
        
@@ -51,7 +53,7 @@ public class GameProcessControll{
         this.stage = 2;
         //戰鬥階段：這個階段中可以移動怪獸並進行戰鬥，這個階段可能會有相對的魔法卡可以輔助使用。
     }
-    void changePosition() {
+   /* void changePosition() {
         if (handcardposition == 0)
         {
             handcardposition += cardpositionNum;
@@ -63,9 +65,36 @@ public class GameProcessControll{
         {
             handcardposition = cardpositionNum - handcardposition;
         }
-    }
+    }*/
     public void drawCard() {
-        cardQuantity--;
-        GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
+        if(stage == 1)
+        {
+            var s = mcard.getCard(1);
+            cardQuantity--;
+            GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
+            GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(400, 0), "wolf", s);
+            this.handcardposition = 0;
+            cardOnHand = GameObject.Find("HandArea").gameObject.transform.childCount;
+            this.cardpositionNum = 600 / cardOnHand;
+            //調整位置
+            setcardPosition(cardOnHand);
+        }
+        else
+        {
+
+        }
+        
+    }
+    void setcardPosition(int childnum) {
+        //迴圈調整
+       
+            for (int i = 0; i < childnum; i++)
+            {
+                handcardposition += cardpositionNum;
+                GameObject.Find("HandArea").gameObject.transform.GetChild(i).gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0);
+            }
+        
+      
+        
     }
 }
