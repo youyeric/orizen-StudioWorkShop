@@ -35,6 +35,6 @@ public class CreateTile : MonoBehaviour {
                 tileEdgeN++;
             }
         }
-        GameProcessControll Gprocess = new GameProcessControll(new MyCard(), uic);
+        GameProcessControll Gprocess = new GameProcessControll(new MyCard("cardAlbum.csv"), uic);
     }
 }

@@ -15,17 +15,19 @@ public class MyCard {
 
     private int i;
 
-    public MyCard()
+    public MyCard(string path)
     {
         r = new System.Random();
         this.i = 0;
         yourCard = new List<string[]>();
+        this.CardDataPathBase = System.Environment.CurrentDirectory + "/CardData/" + path;
         this.loadCard();
+        
     }
 
     public void loadCard() {
         string str;
-        SR = new StreamReader(System.Environment.CurrentDirectory + "/CardData/cardAlbum.csv");
+        SR = new StreamReader(CardDataPathBase);
         str = SR.ReadLine();
         while (str != null)
         {
@@ -49,6 +51,9 @@ public class MyCard {
     {
         
         return yourCard[quantity];
+    }
+    public int getCardQuantity() {
+        return yourCard.Count;
     }
    public void cardAdd(string c_name , int cardQuantity)
     {

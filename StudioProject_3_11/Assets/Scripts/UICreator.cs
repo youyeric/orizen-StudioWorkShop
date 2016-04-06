@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class UICreator : MonoBehaviour {
+public class UICreator
+{
     int guiLayer = 5;
     public UICreator(int setLayer)
     {
@@ -88,7 +89,7 @@ public class UICreator : MonoBehaviour {
         text.fontSize = fontSize;
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
         text.alignment = TextAnchor.MiddleCenter;
-        text.horizontalOverflow = HorizontalWrapMode.Overflow;
+        text.horizontalOverflow = HorizontalWrapMode.Wrap;
         text.color = fontC;
 
 
@@ -170,12 +171,23 @@ public class UICreator : MonoBehaviour {
         CanvasRenderer rederer = card.AddComponent<CanvasRenderer>();
 
         Image image = card.AddComponent<Image>();
-        Texture2D tex = Resources.Load<Texture2D>(path);
-        image.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
 
         CardData cd = card.AddComponent<CardData>();
         cd.cardNumber = cardinfo[0];
+        cd.cardName = cardinfo[1];
+        cd.cardLifePoint = cardinfo[2];
+        cd.cardAttack = cardinfo[3];
+        cd.cardSpeed = cardinfo[4];
+        cd.attackRange = cardinfo[5];
+        cd.attackType = cardinfo[6];
+        cd.gold = cardinfo[7];
+        cd.cardAttribute = cardinfo[8];
+        cd.cardPicturePath = cardinfo[9];
+        cd.cardAlbums = cardinfo[10].Split('/');
+        cd.ui = this;
+
         CardSelected cdsel = card.AddComponent<CardSelected>();
+        
 
         Button btn = card.AddComponent<Button>();
         btn.onClick.AddListener(delegate { cdsel.selected(); });

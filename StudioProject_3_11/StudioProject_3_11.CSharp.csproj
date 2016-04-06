@@ -78,6 +78,8 @@
     <Compile Include="Assets\DataSender.cs" />
     <Compile Include="Assets\RemoteConnection.cs" />
     <Compile Include="Assets\ScreenStream.cs" />
+    <Compile Include="Assets\Scripts\BagController.cs" />
+    <Compile Include="Assets\Scripts\BagView.cs" />
     <Compile Include="Assets\Scripts\BattleCamera.cs" />
     <Compile Include="Assets\Scripts\CardData.cs" />
     <Compile Include="Assets\Scripts\CardSelectInitialPanel.cs" />
