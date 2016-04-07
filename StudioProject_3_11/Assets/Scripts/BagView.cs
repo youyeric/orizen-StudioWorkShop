@@ -14,6 +14,8 @@ public class BagView : MonoBehaviour {
         ui.createText("cardInBagText", cardbag.gameObject.transform, 0, 190, 50, 50, "牌庫", 18, Color.white);
         ui.createButton("return", this.gameObject.transform, new Vector2(350, -225), new Vector2(50 , 25), "返回",10, Color.white, "button", delegate { GameObject.Find("GameController").gameObject.GetComponent<LoadScene>().returnToMain(this.gameObject); });
         bgcontroll = new BagController(ui, cardbag.gameObject.transform, cardAlb.gameObject.transform, new MyCard("bag.csv"));
+        //儲存button
+        //加入排組button setActive(false);
         
 	}
 	
