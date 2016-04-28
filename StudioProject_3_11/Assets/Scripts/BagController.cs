@@ -20,12 +20,12 @@ public class BagController {
         this.pageNum = 0;
         pages = new List<GameObject>();
         LoadCardToView();
-        bgAlbums = new MyCard("cardAlbums.csv");
+        bgAlbums = new MyCard();
+        bgAlbums.loadCard("cardAlbums.csv");
         
     }
     private void LoadCardToView()
     {
-       
         int initialIndex = this.allCardLoadindex;
         setView(initialIndex ,this.allCardLoadindex);
     }

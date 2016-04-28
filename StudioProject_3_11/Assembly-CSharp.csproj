@@ -49,8 +49,10 @@
      <Compile Include="Assets\DataSender.cs" />
      <Compile Include="Assets\RemoteConnection.cs" />
      <Compile Include="Assets\ScreenStream.cs" />
+     <Compile Include="Assets\Scripts\BagController.cs" />
+     <Compile Include="Assets\Scripts\BagView.cs" />
      <Compile Include="Assets\Scripts\BattleCamera.cs" />
-     <Compile Include="Assets\Scripts\ButtonController.cs" />
+     <Compile Include="Assets\Scripts\CardAlbum.cs" />
      <Compile Include="Assets\Scripts\CardData.cs" />
      <Compile Include="Assets\Scripts\CardSelectInitialPanel.cs" />
      <Compile Include="Assets\Scripts\CardSelected.cs" />
@@ -67,11 +69,17 @@
      <Compile Include="Assets\Scripts\terrainGrid.cs" />
      <Compile Include="Assets\Utils.cs" />
      <Compile Include="Assets\WebCamStreamer.cs" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>E:/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>E:/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

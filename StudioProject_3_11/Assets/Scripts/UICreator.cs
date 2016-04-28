@@ -155,9 +155,11 @@ public class UICreator
 
         return imageObject;
     }
+    //(卡名、父物件、大小、位置、Materials路徑、卡片資訊)
     public GameObject createCardGUI(string name, Transform tr, Vector2 size, Vector2 position, string path, string[] cardinfo)
     {
         GameObject card = new GameObject(name);
+        card.tag = "Card";
         card.transform.SetParent(tr);
 
         RectTransform cardScope = card.AddComponent<RectTransform>();
@@ -173,19 +175,9 @@ public class UICreator
         Image image = card.AddComponent<Image>();
 
         CardData cd = card.AddComponent<CardData>();
-        cd.cardNumber = cardinfo[0];
-        cd.cardName = cardinfo[1];
-        cd.cardLifePoint = cardinfo[2];
-        cd.cardAttack = cardinfo[3];
-        cd.cardSpeed = cardinfo[4];
-        cd.attackRange = cardinfo[5];
-        cd.attackType = cardinfo[6];
-        cd.gold = cardinfo[7];
-        cd.cardAttribute = cardinfo[8];
-        cd.cardPicturePath = cardinfo[9];
-        cd.cardAlbums = cardinfo[10].Split('/');
+        cd.cm = new CardModel(cardinfo);
         cd.ui = this;
-
+        
         CardSelected cdsel = card.AddComponent<CardSelected>();
         
 
@@ -194,7 +186,7 @@ public class UICreator
         return card;
     }
 
-    private GameObject createEventSystem(Transform tr)
+    /*private GameObject createEventSystem(Transform tr)
     {
         GameObject evenObj = new GameObject("EventSystem");
         EventSystem evenClass = evenObj.AddComponent<EventSystem>();
@@ -209,7 +201,7 @@ public class UICreator
         evenObj.transform.SetParent(tr);
 
         return evenObj;
-    }
+    }*/
     public GameObject createTile(string tileName,Transform tf, float x, float y, float z, Material myM) {
         GameObject tQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
         tQuad.name = tileName;

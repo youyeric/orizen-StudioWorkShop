@@ -174,38 +174,38 @@ PlayerSettings:
     m_Icons:
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 2e406987ac739894a8c730aee4ca3a7c, type: 3}
-      m_Width: 128
-      m_Height: 128
+      m_Width: 0
+      m_Height: 0
   - m_BuildTarget: iPhone
     m_Icons:
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: cb5a31c1dac864b5f90811c410e7e572, type: 3}
-      m_Width: 152
-      m_Height: 152
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: c94506069dd2c484780fb8bbe4a4eb17, type: 3}
-      m_Width: 144
-      m_Height: 144
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: 246bc47f24a854aaea5efe68ae683fc3, type: 3}
-      m_Width: 120
-      m_Height: 120
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
-      m_Width: 114
-      m_Height: 114
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: cafb14b415d7f4a828994e2c02e28938, type: 3}
-      m_Width: 76
-      m_Height: 76
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 2800000, guid: fdd4612c583e9480dac1f3782facd476, type: 3}
-      m_Width: 72
-      m_Height: 72
+      m_Width: 0
+      m_Height: 0
     - serializedVersion: 2
       m_Icon: {fileID: 0}
-      m_Width: 57
-      m_Height: 57
+      m_Width: 0
+      m_Height: 0
   m_BuildTargetBatching:
   - m_BuildTarget: Standalone
     m_StaticBatching: 1

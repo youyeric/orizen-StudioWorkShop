@@ -158,6 +158,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -471,10 +472,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 613905946}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -434.6}
-  m_SizeDelta: {x: 800, y: 135}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -184.6}
+  m_SizeDelta: {x: 0, y: -365}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &384672790
 MonoBehaviour:
@@ -547,7 +548,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 802, y: 505}
+  m_SizeDelta: {x: 805, y: 505}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522604977
 MonoBehaviour:
@@ -965,7 +966,7 @@ GameObject:
   - 114: {fileID: 903591974}
   m_Layer: 5
   m_Name: EnterBattlePhase
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

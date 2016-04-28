@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class CardSelected : MonoBehaviour {
     TileMouseOver tileMouseOver;
     string thisName;
+    string mName;
     bool isCardSeleted = false;
     UICreator uic = new UICreator(5);
     Button setCardButton;
@@ -15,12 +16,14 @@ public class CardSelected : MonoBehaviour {
     private static GameObject whatCardwantoDo = null;
     GameObject gameController;
     Material newMaterial;
+    public GameObject[] cards;
     void Start()
     {
+        mName = this.GetComponent<CardData>().cm.cardPicturePath;
         thisCardButton = this.GetComponent<Button>();
         gameController = GameObject.Find("GameController");
         thisName = this.transform.name;
-        newMaterial = Resources.Load("Materials/wolf", typeof(Material)) as Material;
+        newMaterial = Resources.Load("Materials/"+mName, typeof(Material)) as Material;
     }
     public void selected() {
         if (!isCardSeleted && GameObject.Find("whatCardwantoDo") == null)
@@ -28,7 +31,11 @@ public class CardSelected : MonoBehaviour {
             float Xposition = this.gameObject.GetComponent<RectTransform>().anchoredPosition.x;
             whatCardwantoDo = uic.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 200, 200, Xposition, 0, "MessageBox");
             setCardButton = uic.createButton("set", GameObject.Find("whatCardwantoDo").gameObject.transform, new Vector2(0, 53), new Vector2(160, 50), "放置", 30, Color.white, "button", delegate { setCardButtonScript();}).GetComponent<Button>();
-            
+            this.gameObject.tag = "Untagged";
+            if (cards == null)
+                cards = GameObject.FindGameObjectsWithTag("Card");
+            foreach(GameObject go in cards)
+                go.GetComponent<Button>().interactable = false;
             isCardSeleted = true;
         }
         else
@@ -36,12 +43,18 @@ public class CardSelected : MonoBehaviour {
             if (GameObject.Find("whatCardwantoDo") != null)
             {
                 Destroy(whatCardwantoDo);
+                foreach (GameObject go in cards)
+                    go.GetComponent<Button>().interactable = true;
+                this.gameObject.tag = "Card";
             }
             isCardSeleted = false;
         }
     }
     public void setCardButtonScript()
     {
+        foreach (GameObject go in cards)
+            go.GetComponent<Button>().interactable = true;
+        this.gameObject.tag = "Card";
         thisCardButton.interactable = false;
         Destroy(whatCardwantoDo);
         gameController.AddComponent<TileMouseOver>();

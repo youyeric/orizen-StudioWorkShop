@@ -22,22 +22,22 @@ public class GameProcessControll{
         this.cardOnHand = 5;
         this.cardpositionNum = 600 / cardOnHand;
         this.cardQuantity = 40;
-        
-        initial();       
+        initial();
     }
     void initial()
     {
         //把排導到場上牌堆
         //action 抽五張牌
+        mcard.loadCard("cardAlbum.csv");
         var s = mcard.getCard(1);
         for(int i = 0; i < 5; i++)
         {
             handcardposition += cardpositionNum;
-            GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0), "wolf", s);
+            GameObject temp = ViewUI.createCardGUI(s[1]+i, GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0), "Materials/wolf", s);
             
             //changePosition();
         }
-        ViewUI.createButton("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(300, -185), new Vector2(63, 108), cardQuantity.ToString(), 40, new Color(1, 1, 1), "wolf", delegate { drawCard(); });
+        ViewUI.createButton("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(300, -185), new Vector2(63, 108), cardQuantity.ToString(), 40, new Color(1, 1, 1), "wolf", delegate { drawCard(); }).tag = "Card";
        
         //handCard = s;
         round++;

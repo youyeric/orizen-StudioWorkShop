@@ -17,10 +17,19 @@ public class ForTile : MonoBehaviour {
     }
     public void setCardOnTile(Material m, GameObject card)
     {
+        CardModel temp = card.GetComponent<CardData>().cm;
+        temp.state = "Ground";
         isUsed = true;
-        rend.material = m;
+        CardData cd = this.gameObject.AddComponent<CardData>();
+        cd.cm = temp;
+        //rend.material = m;
+        this.gameObject.AddComponent<CardMove>();
         Destroy(card);
         Destroy(gameController.GetComponent<TileMouseOver>());
+    }
+    public void setCardOnMove()
+    {
+
     }
     public void setHighLightColor()
     {

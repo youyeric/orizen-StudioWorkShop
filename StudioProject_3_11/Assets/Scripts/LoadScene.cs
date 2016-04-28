@@ -3,18 +3,13 @@ using System.Collections;
 
 public class LoadScene : MonoBehaviour {
     GameObject eventSystem;
-    GameObject mainPanel;
     bool eventSystemActivate = true;
     UICreator ui;
-    void Awake()
+    void Start()
     {
         eventSystem = GameObject.Find("EventSystem");
-        mainPanel = GameObject.Find("MainPanel").gameObject;
         ui = new UICreator(5);
     }
-
-       
-    
     public void enterStartScene()
     {
         Application.LoadLevel(0);
@@ -23,16 +18,17 @@ public class LoadScene : MonoBehaviour {
     {
         Application.LoadLevel(1);
     }
-    public void enterBagPanel()
+    public void enterEditDeckScene()
     {
-        mainPanel.SetActive(false);
-        GameObject bagPanel = ui.createPanel("bag", GameObject.Find("RegularCanvas").gameObject.transform, 800, 500, 0, 0, "442432");
-        bagPanel.AddComponent<BagView>();
+        Application.LoadLevel(2);
     }
-    public void returnToMain(GameObject putInvisibleObject)
+    public void enterBagScene()
     {
-        Destroy(putInvisibleObject);
-        mainPanel.SetActive(true);
+        Application.LoadLevel(3);
+    }
+    public void enterTextField()
+    {
+        Application.LoadLevel(4);
     }
     public void changeEventSystemStatus()
     {
