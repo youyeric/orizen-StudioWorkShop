@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 [System.Serializable]
-//³o­Ó¬O¥Î¨Ó®·®»¥i¥H©ñ¸mªºtile
+//é€™å€‹æ˜¯ç”¨ä¾†æ•æ‰å¯ä»¥æ”¾ç½®çš„tile
 public class TileMouseOver : MonoBehaviour {
     string cardName;
     Material m;
@@ -65,7 +65,7 @@ public class TileMouseOver : MonoBehaviour {
     {
         foreach(int i in t)
         {
-            if(i > 0)
+            if(i >= 0)
             {
                 tiles = GameObject.Find("Tile" + i);
                 tiles.tag = "Tile";
