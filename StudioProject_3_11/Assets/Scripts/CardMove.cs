@@ -52,9 +52,30 @@ public class CardMove : MonoBehaviour {
     }
     void setMove(int east, int west, int south, int north, int index)
     {
-        position[index * 4] = east;
-        position[index * 4 + 1] = west;
-        position[index * 4 + 2] = north;
-        position[index * 4 + 3] = south;
+    	if(east/15 == location/15){
+    		position[index * 4] = east;	
+    	}
+    	else{
+    		position[index * 4] = -1;
+    	}
+        if(west/15 == location/15){
+    		position[index * 4 + 1] = west;	
+    	}
+    	else{
+    		position[index * 4 + 1] = -1;
+    	}
+        if((north >= 0) && (north >= 300){
+        	position[index * 4 + 2] = north;
+        }
+        else{
+        	position[index * 4 + 2] = -1;
+        }
+         if((south >= 0) && (south >= 300){
+        	position[index * 4 + 3] = south;
+        }
+        else{
+        	position[index * 4 + 3] = -1;
+        }
+        
     }
 }
