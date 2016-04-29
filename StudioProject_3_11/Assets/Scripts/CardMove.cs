@@ -64,13 +64,13 @@ public class CardMove : MonoBehaviour {
     	else{
     		position[index * 4 + 1] = -1;
     	}
-        if((north >= 0) && (north >= 300){
+        if((north >= 0) && (north <= 300)){
         	position[index * 4 + 2] = north;
         }
         else{
         	position[index * 4 + 2] = -1;
         }
-         if((south >= 0) && (south >= 300){
+         if((south >= 0) && (south <= 300)){
         	position[index * 4 + 3] = south;
         }
         else{
