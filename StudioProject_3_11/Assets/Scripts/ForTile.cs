@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ForTile : MonoBehaviour {
@@ -26,10 +26,18 @@ public class ForTile : MonoBehaviour {
         this.gameObject.AddComponent<CardMove>();
         Destroy(card);
         Destroy(gameController.GetComponent<TileMouseOver>());
+        gameController.GetComponent<CreateTile>().addHasCardOnTile(this.gameObject);
     }
-    public void setCardOnMove()
+    public void setCardOnMove(GameObject card)
     {
-
+        CardModel temp = card.GetComponent<CardData>().cm;
+        card.GetComponent<ForTile>().isUsed = false;
+        this.isUsed = true;
+        CardData cd = this.gameObject.AddComponent<CardData>();
+        cd.cm = temp;
+        card.GetComponent<Renderer>().material = orgMaterial;
+        Destroy(card.GetComponent<CardMove>());
+        Destroy(card.GetComponent<CardData>());
     }
     public void setHighLightColor()
     {
