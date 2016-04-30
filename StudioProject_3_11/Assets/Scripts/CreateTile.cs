@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 [System.Serializable]
 public class CreateTile : MonoBehaviour {
     //GameObject[,] tileArray = new GameObject[20,15];
@@ -8,8 +9,10 @@ public class CreateTile : MonoBehaviour {
     public Material tileE;
     UICreator uic;
     MyCard card;
+    List<GameObject> tileHasObject;
     public void create()
     {
+        tileHasObject = new List<GameObject>();
         int tileNumber = 0;
         int tileEdgeN = 0;
         uic = new UICreator(5);
@@ -18,6 +21,7 @@ public class CreateTile : MonoBehaviour {
        
         GameObject tiles = new GameObject("Tiles");
         GameObject tileEdges = new GameObject("TileEdges");
+
         
         for (int i = 0; i < 20; i++)
         {
@@ -38,5 +42,9 @@ public class CreateTile : MonoBehaviour {
         MyCard m = new MyCard();
         m.loadCard("cardAlbum.csv");
         GameProcessControll Gprocess = new GameProcessControll(m, uic);
+    }
+    public void addHasCardOnTile(GameObject g){
+        tileHasObject.Add(g);
+        Debug.Log("added!!" + g.gameObject.name);
     }
 }
