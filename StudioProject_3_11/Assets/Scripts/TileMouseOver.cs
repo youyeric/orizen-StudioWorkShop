@@ -1,16 +1,20 @@
 using UnityEngine;
 using System.Collections;
 [System.Serializable]
-//這個是用來捕捉可以放置的tile
+//³o­Ó¬O¥Î¨Ó®·®»¥i¥H©ñ¸mªºtile
 public class TileMouseOver : MonoBehaviour {
     string cardName;
     Material m;
     private GameObject focusObj;
     GameObject tiles;
+    void Start(){
+        setInnitailTile();
+    }
     void Update () {
         if (Input.GetMouseButtonDown(0))
         {
             focusObj = null;
+            
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -22,9 +26,13 @@ public class TileMouseOver : MonoBehaviour {
                     focusObj.GetComponent<ForTile>().setCardOnTile(m, GameObject.Find(cardName));
                     GetComponent<LoadScene>().changeEventSystemStatus();
                 }
-                else if(focusObj.tag == "Moving" && !focusObj.GetComponent<ForTile>().isUsed)
+                else if(focusObj.tag == "GameController" && !focusObj.GetComponent<ForTile>().isUsed)
                 {
-
+                        this.setTileToNormalColor();
+                    focusObj.GetComponent<ForTile>().setCardOnMove(GameObject.Find(cardName));
+                }
+                else {
+                        this.setTileToNormalColor();
                 }
             }
 
@@ -53,24 +61,26 @@ public class TileMouseOver : MonoBehaviour {
     }
     public void setTileToHighLightColor()
     {
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 300; i++)
         {
             tiles = GameObject.Find("Tile" + i);
-            tiles.tag = "Tile";
-            tiles.GetComponent<ForTile>().setHighLightColor();
-            tiles.GetComponent<ForTile>().setCardName(cardName);
+            if(tiles.tag.Equals("Tile")){
+               tiles.GetComponent<ForTile>().setHighLightColor();
+                tiles.GetComponent<ForTile>().setCardName(cardName); 
+            }
+            
         }
     }
     public void setTileToHighLightColor(int[] t)
     {
         foreach(int i in t)
         {
-            if(i >= 0)
-            {
-                tiles = GameObject.Find("Tile" + i);
-                tiles.tag = "Tile";
-                tiles.GetComponent<ForTile>().setHighLightColor();
-            }
+             if(i >= 0)
+                {
+                    tiles = GameObject.Find("Tile" + i);
+                    tiles.tag = "GameController";
+                    tiles.GetComponent<ForTile>().setHighLightColor();
+                }   
         }
     }
     public void setTileToNormalColor()
@@ -81,6 +91,13 @@ public class TileMouseOver : MonoBehaviour {
             tiles.tag = "Tile";
             tiles.GetComponent<ForTile>().setNormalColor();
             tiles.GetComponent<ForTile>().setCardName(cardName);
+        }
+    }
+    public void setInnitailTile(){
+        for (int i = 0; i < 15; i++)
+        {
+            tiles = GameObject.Find("Tile" + i);
+            tiles.tag = "Tile";
         }
     }
 }
