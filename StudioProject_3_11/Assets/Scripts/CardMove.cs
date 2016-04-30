@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CardMove : MonoBehaviour {
@@ -52,30 +52,29 @@ public class CardMove : MonoBehaviour {
     }
     void setMove(int east, int west, int south, int north, int index)
     {
-    	if(east/15 == location/15){
-    		position[index * 4] = east;	
-    	}
-    	else{
-    		position[index * 4] = -1;
-    	}
+        if(east/15 == location/15){
+            position[index * 4] = east;
+        }
+        else{
+            position[index * 4] = -1;
+        }
         if(west/15 == location/15){
-    		position[index * 4 + 1] = west;	
-    	}
-    	else{
-    		position[index * 4 + 1] = -1;
-    	}
+            position[index * 4 + 1] = west;
+        }
+        else{
+            position[index * 4 + 1] = -1;
+        }
         if((north >= 0) && (north <= 300)){
-        	position[index * 4 + 2] = north;
+            position[index * 4 + 2] = north;
         }
         else{
-        	position[index * 4 + 2] = -1;
+            position[index * 4 + 2] = -1;
         }
-         if((south >= 0) && (south <= 300)){
-        	position[index * 4 + 3] = south;
+        if((south >= 0) && (south <= 300)){
+            position[index * 4 + 3] = south;
         }
         else{
-        	position[index * 4 + 3] = -1;
+            position[index * 4 + 3] = -1;
         }
-        
     }
 }
