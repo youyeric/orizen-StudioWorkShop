@@ -3,28 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameProcessControll{
+public class GameProcessControll:MonoBehaviour{
     private int round;
     private int stage;
-    private MyCard mcard;
+    public MyCard mcard;
     private int handcardposition;
     private int cardpositionNum;
-    private UICreator ViewUI;
+    public UICreator ViewUI;
     private int cardQuantity;
     private int cardOnHand;
-    public GameProcessControll(MyCard m,UICreator UI)
+    private CreateTile objOnTile;
+    private GameObject objOnHand;
+    void Start()
     {
         this.round = 0;
         this.stage = 0;
-        this.mcard = m;
-        this.ViewUI = UI;
         this.handcardposition = 0;
         this.cardOnHand = 5;
         this.cardpositionNum = 600 / cardOnHand;
         this.cardQuantity = 40;
-        initial();
+        this.objOnTile = this.gameObject.GetComponent<CreateTile>();
+        this.objOnHand = GameObject.Find("HandArea").gameObject;
+        //initial();
     }
-    void initial()
+   public void initial()
     {
         //把排導到場上牌堆
         //action 抽五張牌
@@ -43,14 +45,23 @@ public class GameProcessControll{
         round++;
         //UI家五張卡
     }
-    void mainStage()
+   public void mainStage()
     {
         this.stage = 1;
         //主要階段：每次只能召喚一次，怪獸效果或是魔法卡等輔助的召喚並不再此限制，魔法卡的使用沒有上限。
     }
-    void BattleStage()
+   public void BattleStage()
     {
         this.stage = 2;
+        this.gameObject.AddComponent<TileMouseOver>();
+        for(int i = 0; i < objOnTile.howManyCardsOnTile(); i++)
+        {
+            objOnTile.getCardOnTile(i).AddComponent<CardMove>();
+        }
+        for(int i = 0; i < objOnHand.transform.childCount; i++)
+        {
+            Destroy(objOnHand.transform.GetChild(i).gameObject.GetComponent<CardSelected>());
+        }
         //戰鬥階段：這個階段中可以移動怪獸並進行戰鬥，這個階段可能會有相對的魔法卡可以輔助使用。
     }
    /* void changePosition() {
@@ -74,7 +85,7 @@ public class GameProcessControll{
             GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
             GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(400, 0), "wolf", s);
             this.handcardposition = 0;
-            cardOnHand = GameObject.Find("HandArea").gameObject.transform.childCount;
+            cardOnHand = objOnHand.transform.childCount;
             this.cardpositionNum = 600 / cardOnHand;
             //調整位置
             setcardPosition(cardOnHand);

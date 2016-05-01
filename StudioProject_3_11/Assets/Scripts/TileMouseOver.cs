@@ -3,12 +3,13 @@ using System.Collections;
 [System.Serializable]
 //³o­Ó¬O¥Î¨Ó®·®»¥i¥H©ñ¸mªºtile
 public class TileMouseOver : MonoBehaviour {
-    string cardName;
+    public string cardName;
     Material m;
-    private GameObject focusObj;
+    public GameObject focusObj;
     GameObject tiles;
     void Start(){
         setInnitailTile();
+        setTileToHighLightColor();
     }
     void Update () {
         if (Input.GetMouseButtonDown(0))
@@ -28,7 +29,7 @@ public class TileMouseOver : MonoBehaviour {
                 }
                 else if(focusObj.tag == "GameController" && !focusObj.GetComponent<ForTile>().isUsed)
                 {
-                        this.setTileToNormalColor();
+                        this.resetHighLightColor();
                     focusObj.GetComponent<ForTile>().setCardOnMove(GameObject.Find(cardName));
                 }
                 else {
@@ -93,11 +94,26 @@ public class TileMouseOver : MonoBehaviour {
             tiles.GetComponent<ForTile>().setCardName(cardName);
         }
     }
+    public void setTileToNormalColor(GameObject t)
+    {
+        t.GetComponent<ForTile>().setNormalColor();
+    }
     public void setInnitailTile(){
         for (int i = 0; i < 15; i++)
         {
             tiles = GameObject.Find("Tile" + i);
             tiles.tag = "Tile";
+        }
+    }
+    public void resetHighLightColor() {
+        for(int i = 0; i < 300; i++)
+        {
+            tiles = GameObject.Find("Tile" + i);
+            if(tiles.tag == "GameController")
+            {
+                tiles.tag = "Tile";
+                this.setTileToNormalColor(tiles);
+            }
         }
     }
 }

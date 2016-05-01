@@ -34,11 +34,18 @@ public class CardMove : MonoBehaviour {
                     focusObj.GetComponent<ForTile>().setCardOnTile(m, GameObject.Find(cardName));
                     GetComponent<LoadScene>().changeEventSystemStatus();
                 }*/
-                Debug.Log(tile);
-                moveInfo();
-                TileMouseOver TMO = gameController.AddComponent<TileMouseOver>();
-                gameController.GetComponent<TileMouseOver>().setCardName(this.gameObject.name, null);
-                TMO.setTileToHighLightColor(position);
+                GameObject focusObj = hit.transform.gameObject;
+                if (focusObj.name.Equals(tile))
+                {
+                    Debug.Log(tile);
+                    
+                    moveInfo();
+                    TileMouseOver TMO = gameController.GetComponent<TileMouseOver>();
+                    TMO.resetHighLightColor();
+                    TMO.setCardName(this.gameObject.name, null);
+                    TMO.setTileToHighLightColor(position);
+                }
+                
             }
 
         }

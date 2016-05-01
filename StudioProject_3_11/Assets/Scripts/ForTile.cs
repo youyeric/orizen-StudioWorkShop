@@ -23,7 +23,6 @@ public class ForTile : MonoBehaviour {
         CardData cd = this.gameObject.AddComponent<CardData>();
         cd.cm = temp;
         //rend.material = m;
-        this.gameObject.AddComponent<CardMove>();
         Destroy(card);
         Destroy(gameController.GetComponent<TileMouseOver>());
         gameController.GetComponent<CreateTile>().addHasCardOnTile(this.gameObject);
@@ -41,14 +40,14 @@ public class ForTile : MonoBehaviour {
     }
     public void setHighLightColor()
     {
-        if(GetComponent<Renderer>().material.name == orgMaterial.name)
+        if(GetComponent<Renderer>().material.name.Substring(0,4) == orgMaterial.name.Substring(0,4))
         {
             rend.material.color = new Color(1, 1, 1, 0.3f);
         }
     }
     public void setNormalColor()
     {
-        if(GetComponent<Renderer>().material.name == orgMaterial.name)
+        if(GetComponent<Renderer>().material.name.Substring(0, 4) == orgMaterial.name.Substring(0, 4))
         {
             rend.material.color = normalColor;
         }

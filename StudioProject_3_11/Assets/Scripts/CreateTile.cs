@@ -41,10 +41,20 @@ public class CreateTile : MonoBehaviour {
         }
         MyCard m = new MyCard();
         m.loadCard("cardAlbum.csv");
-        GameProcessControll Gprocess = new GameProcessControll(m, uic);
+        GameProcessControll Gprocess = GameObject.Find("GameController").GetComponent<GameProcessControll>();
+        Gprocess.mcard = m;
+        Gprocess.ViewUI = uic;
+        Gprocess.initial();
     }
     public void addHasCardOnTile(GameObject g){
         tileHasObject.Add(g);
         Debug.Log("added!!" + g.gameObject.name);
+    }
+    public GameObject getCardOnTile(int index) {
+        return tileHasObject[index];
+    }
+    public int howManyCardsOnTile()
+    {
+        return tileHasObject.Count;
     }
 }
