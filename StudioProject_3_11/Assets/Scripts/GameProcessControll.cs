@@ -14,6 +14,7 @@ public class GameProcessControll:MonoBehaviour{
     private int cardOnHand;
     private CreateTile objOnTile;
     private GameObject objOnHand;
+    private System.Random r;
     void Start()
     {
         this.round = 0;
@@ -24,26 +25,35 @@ public class GameProcessControll:MonoBehaviour{
         this.cardQuantity = 40;
         this.objOnTile = this.gameObject.GetComponent<CreateTile>();
         this.objOnHand = GameObject.Find("HandArea").gameObject;
-        //initial();
+        this.r = new System.Random(); 
     }
    public void initial()
     {
         //把排導到場上牌堆
         //action 抽五張牌
         mcard.loadCard("cardAlbum.csv");
-        var s = mcard.getCard(1);
+        
         for(int i = 0; i < 5; i++)
         {
+            int drawCardNum = r.Next(0, mcard.getCardQuantity());
+            var s = mcard.getCard(drawCardNum);
             handcardposition += cardpositionNum;
             GameObject temp = ViewUI.createCardGUI(s[1]+i, GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0), "Materials/wolf", s);
             
             //changePosition();
         }
+        this.cardQuantity = mcard.getCardQuantity();
         ViewUI.createButton("DeckImg", GameObject.Find("RegularCanvas").gameObject.transform, new Vector2(300, -185), new Vector2(63, 108), cardQuantity.ToString(), 40, new Color(1, 1, 1), "wolf", delegate { drawCard(); }).tag = "Card";
-       
+        this.cardQuantity = mcard.yourCard.Count;
         //handCard = s;
         round++;
         //UI家五張卡
+        for(int i = 0; i < mcard.getCardQuantity(); i++)
+        {
+            var s = mcard.getCard(i);
+            Debug.Log(s[0] + " " +i+" "+mcard.yourCard.Count);
+            
+        }
     }
    public void mainStage()
     {
@@ -80,7 +90,8 @@ public class GameProcessControll:MonoBehaviour{
     public void drawCard() {
         if(stage == 1)
         {
-            var s = mcard.getCard(1);
+            int i = r.Next(0, mcard.getCardQuantity());
+            var s = mcard.getCard(i);
             cardQuantity--;
             GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
             GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(400, 0), "wolf", s);
@@ -104,8 +115,6 @@ public class GameProcessControll:MonoBehaviour{
                 handcardposition += cardpositionNum;
                 GameObject.Find("HandArea").gameObject.transform.GetChild(i).gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0);
             }
-        
-      
-        
     }
+  
 }

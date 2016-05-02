@@ -29,6 +29,7 @@ public class MyCard {
         //Path.Combine(PathBase, path)
         string str;
         SR = new StreamReader(Path.Combine(PathBase, path));
+        Debug.Log(Path.Combine(PathBase, path));
         str = SR.ReadLine();
         while (str != null)
         {
@@ -41,17 +42,11 @@ public class MyCard {
         }
         SR.Close();
     }
-    public void addCard(string[] data,int cardQuantity)
-    {
-        for(int i = 0; i< cardQuantity; i++)
-        {
-            yourCard.Add(data);
-        }
-    }
 	public string[] getCard(int quantity)
     {
-        
-        return yourCard[quantity];
+        string[] temp = yourCard[quantity];
+        yourCard.RemoveAt(quantity);
+        return temp;
     }
     public int getCardQuantity() {
         return yourCard.Count;
@@ -62,13 +57,6 @@ public class MyCard {
         SW = new StreamWriter(Path.Combine(PathBase, path), writeState);
         SW.WriteLine(Data);
         SW.Close();
-    }
-   public void cardAdd(string c_name , int cardQuantity)
-    {
-        for(int i = 0; i < cardQuantity; i++)
-        {
-            //yourCard.Add(new Card(c_name ,"+5"));
-        }
     }
     public IEnumerator catchWebData(string url) {
         WWW web = new WWW(webUrl + url);

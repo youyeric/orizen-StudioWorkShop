@@ -2032,9 +2032,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 2054799008}
   - 114: {fileID: 2054799007}
-  - 114: {fileID: 2054799009}
   - 114: {fileID: 2054799010}
   - 114: {fileID: 2054799011}
+  - 114: {fileID: 2054799009}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2076,8 +2076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646109aecb0ec49428cadb426e8e1548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileM: {fileID: 2100000, guid: 411962a944baa9a45974fc7a2ba1fc60, type: 2}
-  tileE: {fileID: 2100000, guid: 5f1ecdb0f2fae224781b48a6ddba335b, type: 2}
+  tileM: {fileID: 0}
+  tileE: {fileID: 0}
 --- !u!114 &2054799010
 MonoBehaviour:
   m_ObjectHideFlags: 0

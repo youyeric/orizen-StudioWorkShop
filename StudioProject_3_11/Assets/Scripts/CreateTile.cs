@@ -10,6 +10,8 @@ public class CreateTile : MonoBehaviour {
     UICreator uic;
     MyCard card;
     List<GameObject> tileHasObject;
+    void Update() {
+    }
     public void create()
     {
         tileHasObject = new List<GameObject>();
@@ -40,7 +42,6 @@ public class CreateTile : MonoBehaviour {
             }
         }
         MyCard m = new MyCard();
-        m.loadCard("cardAlbum.csv");
         GameProcessControll Gprocess = GameObject.Find("GameController").GetComponent<GameProcessControll>();
         Gprocess.mcard = m;
         Gprocess.ViewUI = uic;
