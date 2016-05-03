@@ -14,7 +14,7 @@ public class CardMove : MonoBehaviour {
         this.speed = System.Int32.Parse(cm.cardSpeed);
         position = new int[speed * 4];
         tile = this.gameObject.name;
-        location = System.Int32.Parse( tile.Substring(4));
+        location = System.Int32.Parse(this.gameObject.name.Split(' ')[1]);
         gameController = GameObject.Find("GameController");
     }
 	

@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\BagView.cs" />
     <Compile Include="Assets\Scripts\BattleCamera.cs" />
     <Compile Include="Assets\Scripts\CardAlbum.cs" />
+    <Compile Include="Assets\Scripts\CardAnimation.cs" />
     <Compile Include="Assets\Scripts\CardData.cs" />
     <Compile Include="Assets\Scripts\CardModel.cs" />
     <Compile Include="Assets\Scripts\CardMove.cs" />

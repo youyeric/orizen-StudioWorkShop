@@ -20,23 +20,27 @@ public class ForTile : MonoBehaviour {
         CardModel temp = card.GetComponent<CardData>().cm;
         temp.state = "Ground";
         isUsed = true;
-        CardData cd = this.gameObject.AddComponent<CardData>();
-        cd.cm = temp;
+        //CardData cd = this.gameObject.AddComponent<CardData>();
+        //cd.cm = temp;
         //rend.material = m;
+        gameController.GetComponent<CreateTile>().addHasCardOnTile(temp, this.gameObject);
         Destroy(card);
         Destroy(gameController.GetComponent<TileMouseOver>());
-        gameController.GetComponent<CreateTile>().addHasCardOnTile(this.gameObject);
+       
     }
     public void setCardOnMove(GameObject card)
     {
-        CardModel temp = card.GetComponent<CardData>().cm;
-        card.GetComponent<ForTile>().isUsed = false;
+        //CardModel temp = card.GetComponent<CardData>().cm;
+        //card.GetComponent<ForTile>().isUsed = false;
         this.isUsed = true;
-        CardData cd = this.gameObject.AddComponent<CardData>();
-        cd.cm = temp;
-        card.GetComponent<Renderer>().material = orgMaterial;
+        Transform cardtr = card.transform;
+        cardtr.position = new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y,7);
+
+        //CardData cd = this.gameObject.AddComponent<CardData>();
+        //cd.cm = temp;
+        //card.GetComponent<Renderer>().material = orgMaterial;
         Destroy(card.GetComponent<CardMove>());
-        Destroy(card.GetComponent<CardData>());
+        //Destroy(card.GetComponent<CardData>());
     }
     public void setHighLightColor()
     {

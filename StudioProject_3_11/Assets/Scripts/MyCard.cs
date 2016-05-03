@@ -100,6 +100,14 @@ public class MyCard {
         SW.WriteLine(Data);
         SW.Close();*/
     }
+    public int cardIndex(int index , string tag) {
+        int i = 0;
+        while(i < yourCard.Count&& !yourCard[i][index].Equals(tag))
+        {
+            i++;
+        }
+        return i;
+    }
     /* void startGetCard()
      {
          textobject = new GameObject("Text");

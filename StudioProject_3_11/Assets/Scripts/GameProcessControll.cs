@@ -14,6 +14,7 @@ public class GameProcessControll:MonoBehaviour{
     private int cardOnHand;
     private CreateTile objOnTile;
     private GameObject objOnHand;
+    private GameObject objOnGround;
     private System.Random r;
     void Start()
     {
@@ -25,6 +26,7 @@ public class GameProcessControll:MonoBehaviour{
         this.cardQuantity = 40;
         this.objOnTile = this.gameObject.GetComponent<CreateTile>();
         this.objOnHand = GameObject.Find("HandArea").gameObject;
+       
         this.r = new System.Random(); 
     }
    public void initial()
@@ -64,9 +66,10 @@ public class GameProcessControll:MonoBehaviour{
     {
         this.stage = 2;
         this.gameObject.AddComponent<TileMouseOver>();
-        for(int i = 0; i < objOnTile.howManyCardsOnTile(); i++)
+         this.objOnGround = GameObject.Find("cardOnGround").gameObject;
+        for(int i = 0; i < objOnGround.transform.childCount; i++)
         {
-            objOnTile.getCardOnTile(i).AddComponent<CardMove>();
+            objOnGround.transform.GetChild(i).gameObject.AddComponent<CardMove>();
         }
         for(int i = 0; i < objOnHand.transform.childCount; i++)
         {
@@ -74,19 +77,19 @@ public class GameProcessControll:MonoBehaviour{
         }
         //戰鬥階段：這個階段中可以移動怪獸並進行戰鬥，這個階段可能會有相對的魔法卡可以輔助使用。
     }
-   /* void changePosition() {
-        if (handcardposition == 0)
-        {
-            handcardposition += cardpositionNum;
-        }
-        else if (handcardposition > 0) {
-            handcardposition = 0 - handcardposition;
-        }
-        else if (handcardposition < 0)
-        {
-            handcardposition = cardpositionNum - handcardposition;
-        }
-    }*/
+    /* void changePosition() {
+         if (handcardposition == 0)
+         {
+             handcardposition += cardpositionNum;
+         }
+         else if (handcardposition > 0) {
+             handcardposition = 0 - handcardposition;
+         }
+         else if (handcardposition < 0)
+         {
+             handcardposition = cardpositionNum - handcardposition;
+         }
+     }*/
     public void drawCard() {
         if(stage == 1)
         {
@@ -107,7 +110,7 @@ public class GameProcessControll:MonoBehaviour{
         }
         
     }
-    void setcardPosition(int childnum) {
+   public void setcardPosition(int childnum) {
         //迴圈調整
        
             for (int i = 0; i < childnum; i++)
@@ -116,5 +119,26 @@ public class GameProcessControll:MonoBehaviour{
                 GameObject.Find("HandArea").gameObject.transform.GetChild(i).gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(handcardposition - 400 - (cardpositionNum / 2), 0);
             }
     }
-  
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+    public void drawCard(int index)
+    {
+        if (stage == 1)
+        {
+            var s = mcard.getCard(index);
+            cardQuantity--;
+            GameObject.Find("DeckImgText").gameObject.GetComponent<Text>().text = cardQuantity.ToString();
+            GameObject temp = ViewUI.createCardGUI(s[1], GameObject.Find("HandArea").gameObject.transform, new Vector2(63, 108), new Vector2(400, 0), "wolf", s);
+            this.handcardposition = 0;
+            cardOnHand = objOnHand.transform.childCount;
+            this.cardpositionNum = 600 / cardOnHand;
+            //調整位置
+            setcardPosition(cardOnHand);
+        }
+        else
+        {
+
+        }
+    }
 }
