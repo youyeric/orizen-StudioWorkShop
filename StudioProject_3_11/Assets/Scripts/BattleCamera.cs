@@ -7,6 +7,8 @@ public class BattleCamera : MonoBehaviour {
     private float maxPY = 13.1f;
     private Transform tf;
     private Camera cam;
+    private Vector2 dragOrg;
+    private bool isPanning;
     void Start()
     {
         tf = transform;
@@ -19,7 +21,20 @@ public class BattleCamera : MonoBehaviour {
             Mathf.Clamp(cam.transform.position.y, minPY, maxPY),
             cam.transform.position.z
         );
-        Touch[] touches = Input.touches;
+        if (Input.GetMouseButtonDown(0))
+        {
+            dragOrg = Input.mousePosition;
+            isPanning = true;
+        }
+        if (!Input.GetMouseButton(0)) isPanning = false;
+        if (isPanning)
+        {
+            Vector2 pos = Camera.main.ScreenToViewportPoint((Vector2)Input.mousePosition - dragOrg);
+
+            Vector3 move = new Vector3(0, -pos.y * moveSY, 0);
+            transform.Translate(move, Space.Self);
+        }
+        /*Touch[] touches = Input.touches;
         if (touches.Length >= 1)
         {
             if (touches.Length == 1)
@@ -32,6 +47,6 @@ public class BattleCamera : MonoBehaviour {
                     cam.transform.position += new Vector3(0, positionY, 0);
                 }
             }
-        }
+        }*/
     }
 }

@@ -8,11 +8,16 @@ public class Effect : MonoBehaviour {
     public MyCard mcard;
     public GameProcessControll gameController;
     public List<string> eventList;
+    public static GameObject effectDoPanel = null;
+    public string tile;
     // Use this for initialization
     void Start() {
         gameController = GameObject.Find("GameController").GetComponent<GameProcessControll>();
         onHand = GameObject.Find("HandArea");
         eventList = new List<string>();
+        tile = this.gameObject.name;
+        effectDoPanel = gameController.ViewUI.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 200, 200, 0, 0, "MessageBox");
+        effectDoPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,6 +54,11 @@ public class Effect : MonoBehaviour {
         {
 
         }
+        else if (cm[0].Equals("Ask"))
+        {
+            tileClickEvevtCheck();//做視窗 做效果發動button 作效果取消button
+            eventList.Add("Ask");
+        }
     }
 
     //which
@@ -73,6 +83,7 @@ public class Effect : MonoBehaviour {
         if (cm[0].Equals("which"))
         {
             g = which(setcmd(cm));
+   
         }
         else if (cm.Length > 0)
         {
@@ -145,5 +156,61 @@ public class Effect : MonoBehaviour {
                 gameController.setStage(2);
             }
         }
+    }
+    public void choose(int index, string who) {
+        TileMouseOver tlmo = gameController.gameObject.AddComponent<TileMouseOver>();
+        for(int i = 0; i < this.transform.parent.transform.gameObject.transform.childCount; i++)
+        {
+            GameObject g = this.transform.parent.transform.gameObject.transform.GetChild(i).gameObject;
+            if (g.name.Equals(this.name))
+            {
+                //matirial set
+                if (g.GetComponent<CardData>().cm.info[index].Equals(who))
+                {
+                    g.GetComponent<Renderer>().material.color = new Color(0, 1, 0, 0.3f);
+                }
+            }
+        }
+    }
+    void tileClickEvevtCheck() {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //focusObj = null;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                // focusObj = hit.transform.gameObject;
+                /*if (focusObj.tag == "Tile" && !focusObj.GetComponent<ForTile>().isUsed)
+                {
+                    this.setTileToNormalColor();
+                    focusObj.GetComponent<ForTile>().setCardOnTile(m, GameObject.Find(cardName));
+                    GetComponent<LoadScene>().changeEventSystemStatus();
+                }*/
+                GameObject focusObj = hit.transform.gameObject;
+                if (focusObj.name.Equals(tile))
+                {
+                    Debug.Log(tile);
+
+                 //effectDoBuuton
+                    TileMouseOver TMO = gameController.GetComponent<TileMouseOver>();
+                    TMO.resetHighLightColor();
+                    TMO.setCardName(this.gameObject.name, null);
+                    //TMO.setTileToHighLightColor(position);
+                    eventList.Remove("Ask");
+                }
+
+            }
+
+        }
+    }
+    void effectDoButton(string buttonName ,string cmd) {
+        var cm = cmd.Split(' ');
+        //make panel
+        //make do effect button
+        //effect button will do the setcmd(cm)
+        //make cancel button
+        //cancel button destroy this gobj and this script
+        //最後要AddcardMove
     }
 }

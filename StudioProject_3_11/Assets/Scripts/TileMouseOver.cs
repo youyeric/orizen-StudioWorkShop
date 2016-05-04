@@ -62,7 +62,7 @@ public class TileMouseOver : MonoBehaviour {
     }
     public void setTileToHighLightColor()
     {
-        for (int i = 0; i < 300; i++)
+        for (int i = 0; i < 126; i++)
         {
             tiles = GameObject.Find("Tile" + i);
             if(tiles.tag.Equals("Tile")){
@@ -86,7 +86,7 @@ public class TileMouseOver : MonoBehaviour {
     }
     public void setTileToNormalColor()
     {
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 9; i++)
         {
             tiles = GameObject.Find("Tile" + i);
             tiles.tag = "Tile";
@@ -99,14 +99,14 @@ public class TileMouseOver : MonoBehaviour {
         t.GetComponent<ForTile>().setNormalColor();
     }
     public void setInnitailTile(){
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 9; i++)
         {
             tiles = GameObject.Find("Tile" + i);
             tiles.tag = "Tile";
         }
     }
     public void resetHighLightColor() {
-        for(int i = 0; i < 300; i++)
+        for(int i = 0; i < 126; i++)
         {
             tiles = GameObject.Find("Tile" + i);
             if(tiles.tag == "GameController")

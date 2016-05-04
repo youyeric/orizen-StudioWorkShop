@@ -30,8 +30,9 @@ public class ForTile : MonoBehaviour {
     }
     public void setCardOnMove(GameObject card)
     {
+        //GameObject preTile = GameObject.Find(card.GetComponent<CardMove>().tile);
         //CardModel temp = card.GetComponent<CardData>().cm;
-        //card.GetComponent<ForTile>().isUsed = false;
+        //preTile.GetComponent<ForTile>().isUsed = false;
         this.isUsed = true;
         Transform cardtr = card.transform;
         cardtr.position = new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y,7);

@@ -16,8 +16,9 @@ public class GameProcessControll:MonoBehaviour{
     private GameObject objOnHand;
     private GameObject objOnGround;
     private System.Random r;
-    void Start()
+    void Awake()
     {
+        this.r = new System.Random();
         this.round = 0;
         this.stage = 0;
         this.handcardposition = 0;
@@ -26,8 +27,6 @@ public class GameProcessControll:MonoBehaviour{
         this.cardQuantity = 40;
         this.objOnTile = this.gameObject.GetComponent<CreateTile>();
         this.objOnHand = GameObject.Find("HandArea").gameObject;
-       
-        this.r = new System.Random(); 
     }
    public void initial()
     {

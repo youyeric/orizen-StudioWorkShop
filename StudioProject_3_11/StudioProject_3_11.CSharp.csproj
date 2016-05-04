@@ -58,6 +58,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -91,7 +97,6 @@
     <Compile Include="Assets\Scripts\TileMouseOver.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\UICreator.cs" />
-    <Compile Include="Assets\Scripts\handCardUIControll.cs" />
     <Compile Include="Assets\Scripts\terrainGrid.cs" />
     <Compile Include="Assets\Scripts\webReadTest.cs" />
     <Compile Include="Assets\Utils.cs" />

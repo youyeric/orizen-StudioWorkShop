@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class CardSelected : MonoBehaviour {
     TileMouseOver tileMouseOver;
-    string thisName;
+    public string thisName;
     string mName;
     bool isCardSeleted = false;
     UICreator uic = new UICreator(5);
