@@ -51,10 +51,11 @@ public class CreateTile : MonoBehaviour {
     }
     public void addHasCardOnTile(CardModel cm, GameObject g){
         tileHasObject.Add(g);
-       GameObject card = uic.createTile(cm.cardName + "/" + g.name.Substring(4), GameObject.Find("cardOnGround").gameObject.transform, g.transform.position.x, g.transform.position.y, 7, tileE);
+        GameObject card = uic.createTile(cm.cardName + "/" + g.name.Substring(4), GameObject.Find("cardOnGround").gameObject.transform, g.transform.position.x, g.transform.position.y, 7, tileE);
         CardData cd = card.AddComponent<CardData>();
         cd.cm = cm;
         Debug.Log("added!!" + g.gameObject.name);
+        card.tag = "OnTileCard";
     }
     public GameObject getCardOnTile(int index) {
         return tileHasObject[index];

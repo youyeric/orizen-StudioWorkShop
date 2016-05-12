@@ -8,6 +8,8 @@ public class ForTile : MonoBehaviour {
     Material orgMaterial;
     public bool isUsed = false;
     GameObject gameController;
+    GameObject[] onTileCards = null;
+    
     void Start()
     {
         rend = GetComponent<Renderer>();
@@ -30,9 +32,9 @@ public class ForTile : MonoBehaviour {
     }
     public void setCardOnMove(GameObject card)
     {
-        //GameObject preTile = GameObject.Find(card.GetComponent<CardMove>().tile);
+        GameObject preTile = GameObject.Find("Tile"+ card.GetComponent<CardMove>().location.ToString());
         //CardModel temp = card.GetComponent<CardData>().cm;
-        //preTile.GetComponent<ForTile>().isUsed = false;
+        preTile.GetComponent<ForTile>().isUsed = false;
         this.isUsed = true;
         Transform cardtr = card.transform;
         cardtr.position = new Vector3(this.gameObject.transform.position.x,this.gameObject.transform.position.y,7);
@@ -42,6 +44,11 @@ public class ForTile : MonoBehaviour {
         //card.GetComponent<Renderer>().material = orgMaterial;
         Destroy(card.GetComponent<CardMove>());
         //Destroy(card.GetComponent<CardData>());
+        if (onTileCards == null)
+            onTileCards = GameObject.FindGameObjectsWithTag("OnTileCard");
+        foreach (GameObject go in onTileCards)
+            go.GetComponent<Effect>().enabled = true;
+
     }
     public void setHighLightColor()
     {

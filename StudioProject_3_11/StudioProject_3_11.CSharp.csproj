@@ -58,15 +58,15 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="StudioProject_3_11.CSharp.Plugins.csproj">
+      <Project>{E3D8E8E3-3D1C-C00B-90D6-F948C7A53551}</Project>
+      <Name>StudioProject_3_11.CSharp.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\DataReceiver.cs" />
@@ -94,11 +94,13 @@
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\MyCard.cs" />
     <Compile Include="Assets\Scripts\Temp.cs" />
+    <Compile Include="Assets\Scripts\TestFirebase.cs" />
     <Compile Include="Assets\Scripts\TileMouseOver.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\UICreator.cs" />
     <Compile Include="Assets\Scripts\terrainGrid.cs" />
     <Compile Include="Assets\Scripts\webReadTest.cs" />
+    <Compile Include="Assets\TestScript.cs" />
     <Compile Include="Assets\Utils.cs" />
     <Compile Include="Assets\WebCamStreamer.cs" />
   </ItemGroup>

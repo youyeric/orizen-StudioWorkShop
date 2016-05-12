@@ -65,9 +65,10 @@ public class GameProcessControll:MonoBehaviour{
     {
         this.stage = 2;
         this.gameObject.AddComponent<TileMouseOver>();
-         this.objOnGround = GameObject.Find("cardOnGround").gameObject;
+        this.objOnGround = GameObject.Find("cardOnGround").gameObject;
         for(int i = 0; i < objOnGround.transform.childCount; i++)
         {
+            objOnGround.transform.GetChild(i).gameObject.AddComponent<Effect>();
             objOnGround.transform.GetChild(i).gameObject.AddComponent<CardMove>();
         }
         for(int i = 0; i < objOnHand.transform.childCount; i++)

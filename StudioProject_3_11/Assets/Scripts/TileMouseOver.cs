@@ -7,9 +7,9 @@ public class TileMouseOver : MonoBehaviour {
     Material m;
     public GameObject focusObj;
     GameObject tiles;
+    public string tags;
     void Start(){
-        setInnitailTile();
-        setTileToHighLightColor();
+        
     }
     void Update () {
         if (Input.GetMouseButtonDown(0))
@@ -21,19 +21,19 @@ public class TileMouseOver : MonoBehaviour {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 focusObj = hit.transform.gameObject;
-                if (focusObj.tag == "Tile" && !focusObj.GetComponent<ForTile>().isUsed)
+                if (tags.Equals("Tile") && focusObj.tag == tags && !focusObj.GetComponent<ForTile>().isUsed)
                 {
                     this.setTileToNormalColor();
                     focusObj.GetComponent<ForTile>().setCardOnTile(m, GameObject.Find(cardName));
                     GetComponent<LoadScene>().changeEventSystemStatus();
                 }
-                else if(focusObj.tag == "GameController" && !focusObj.GetComponent<ForTile>().isUsed)
+                else if(tags.Equals("GameController") &&focusObj.tag == tags && !focusObj.GetComponent<ForTile>().isUsed)
                 {
                         this.resetHighLightColor();
                     focusObj.GetComponent<ForTile>().setCardOnMove(GameObject.Find(cardName));
                 }
                 else {
-                        this.setTileToNormalColor();
+                    this.resetHighLightColor();
                 }
             }
 
@@ -89,7 +89,7 @@ public class TileMouseOver : MonoBehaviour {
         for (int i = 0; i < 9; i++)
         {
             tiles = GameObject.Find("Tile" + i);
-            tiles.tag = "Tile";
+            tiles.tag = "Untagged";
             tiles.GetComponent<ForTile>().setNormalColor();
             tiles.GetComponent<ForTile>().setCardName(cardName);
         }

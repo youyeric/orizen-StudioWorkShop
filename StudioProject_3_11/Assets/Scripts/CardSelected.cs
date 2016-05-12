@@ -28,7 +28,7 @@ public class CardSelected : MonoBehaviour {
     public void selected() {
         if (!isCardSeleted && GameObject.Find("whatCardwantoDo") == null)
         {
-            float Xposition = this.gameObject.GetComponent<RectTransform>().anchoredPosition.x;
+            float Xposition = this.gameObject.GetComponent<RectTransform>().anchoredPosition.x + 30;
             whatCardwantoDo = uic.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 200, 200, Xposition, 0, "MessageBox");
             setCardButton = uic.createButton("set", GameObject.Find("whatCardwantoDo").gameObject.transform, new Vector2(0, 53), new Vector2(160, 50), "放置", 30, Color.white, "button", delegate { setCardButtonScript();}).GetComponent<Button>();
             this.gameObject.tag = "Untagged";
@@ -57,9 +57,12 @@ public class CardSelected : MonoBehaviour {
         this.gameObject.tag = "Card";
         thisCardButton.interactable = false;
         Destroy(whatCardwantoDo);
-        gameController.AddComponent<TileMouseOver>();
-        gameController.GetComponent<TileMouseOver>().setCardName(thisName, newMaterial);
-        gameController.GetComponent<TileMouseOver>().setTileToHighLightColor();
+        TileMouseOver TMO = gameController.AddComponent<TileMouseOver>();
+        TMO.tags = "Tile";
+        TMO.setInnitailTile();
+        TMO.setCardName(thisName, newMaterial);
+        
+        TMO.setTileToHighLightColor();
         gameController.GetComponent<LoadScene>().changeEventSystemStatus();
     }
 }

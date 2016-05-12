@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class Effect : MonoBehaviour {
+    UICreator uic = new UICreator(5);
     public string[] ef;
     public GameObject onHand;
     public MyCard mcard;
@@ -10,14 +14,15 @@ public class Effect : MonoBehaviour {
     public List<string> eventList;
     public static GameObject effectDoPanel = null;
     public string tile;
+    public bool isCardSeleted = false;
+    Button moveButton;
+    GameObject[] onTileCards = null;
     // Use this for initialization
     void Start() {
         gameController = GameObject.Find("GameController").GetComponent<GameProcessControll>();
         onHand = GameObject.Find("HandArea");
         eventList = new List<string>();
         tile = this.gameObject.name;
-        effectDoPanel = gameController.ViewUI.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 200, 200, 0, 0, "MessageBox");
-        effectDoPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,6 +30,28 @@ public class Effect : MonoBehaviour {
         foreach(string cmd in eventList)
         {
             when(cmd);
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            //focusObj = null;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                // focusObj = hit.transform.gameObject;
+                /*if (focusObj.tag == "Tile" && !focusObj.GetComponent<ForTile>().isUsed)
+                {
+                    this.setTileToNormalColor();
+                    focusObj.GetComponent<ForTile>().setCardOnTile(m, GameObject.Find(cardName));
+                    GetComponent<LoadScene>().changeEventSystemStatus();
+                }*/
+                GameObject focusObj = hit.transform.gameObject;
+                if (focusObj.name.Equals(tile))
+                {
+                    Debug.Log(tile);
+                    cardSelected();
+                }
+            }
         }
     }
     //when
@@ -204,7 +231,37 @@ public class Effect : MonoBehaviour {
 
         }
     }
-    void effectDoButton(string buttonName ,string cmd) {
+    public void cardSelected() {
+        if (!isCardSeleted && GameObject.Find("whatCardwantoDo") == null)
+        {
+            effectDoPanel = gameController.ViewUI.createPanel("whatCardwantoDo", GameObject.Find("RegularCanvas").gameObject.transform, 150, 360, 320, 66, "MessageBox");
+            moveButton = uic.createButton("move", GameObject.Find("whatCardwantoDo").gameObject.transform, new Vector2(0, 0), new Vector2(120, 50), "移動", 30, Color.white, "button", delegate { this.gameObject.GetComponent<CardMove>().moveInfo(); }).GetComponent<Button>();
+            moveButton.onClick.AddListener(delegate { Destroy(GameObject.Find("whatCardwantoDo")); });
+            if(System.Int32.Parse(this.GetComponent<CardData>().cm.cardSpeed) == 0)
+            {
+                moveButton.interactable = false;
+            }
+            this.gameObject.tag = "Untagged";
+            if (onTileCards == null)
+                onTileCards = GameObject.FindGameObjectsWithTag("OnTileCard");
+            foreach (GameObject go in onTileCards)
+                go.GetComponent<Effect>().enabled = false;
+            isCardSeleted = true;
+        }
+        else
+        {
+            if (GameObject.Find("whatCardwantoDo") != null)
+            {
+                Destroy(effectDoPanel);
+                foreach (GameObject go in onTileCards)
+                    go.GetComponent<Effect>().enabled = true;
+                this.gameObject.tag = "OnTileCard";
+            }
+            isCardSeleted = false;
+        }
+    }
+    void effectDoButton(string buttonName, string cmd)
+    {
         var cm = cmd.Split(' ');
         //make panel
         //make do effect button
