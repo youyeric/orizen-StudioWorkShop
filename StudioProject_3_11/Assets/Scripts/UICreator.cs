@@ -4,6 +4,10 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+public interface ShowWebInfo
+{
+    void show(string info);
+}
 public class UICreator
 {
     int guiLayer = 5;

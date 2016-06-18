@@ -74,6 +74,7 @@
     <Compile Include="Assets\RemoteConnection.cs" />
     <Compile Include="Assets\ScreenStream.cs" />
     <Compile Include="Assets\Scripts\Account.cs" />
+    <Compile Include="Assets\Scripts\AccountLogIn.cs" />
     <Compile Include="Assets\Scripts\AddNewDeckToList.cs" />
     <Compile Include="Assets\Scripts\BagController.cs" />
     <Compile Include="Assets\Scripts\BagView.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Assets\Scripts\UICreator.cs" />
     <Compile Include="Assets\Scripts\terrainGrid.cs" />
     <Compile Include="Assets\Scripts\webReadTest.cs" />
+    <Compile Include="Assets\ShowMainPage.cs" />
     <Compile Include="Assets\TestScript.cs" />
     <Compile Include="Assets\Utils.cs" />
     <Compile Include="Assets\WebCamStreamer.cs" />

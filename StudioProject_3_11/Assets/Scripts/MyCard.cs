@@ -58,12 +58,14 @@ public class MyCard {
         SW.WriteLine(Data);
         SW.Close();
     }
-    public IEnumerator catchWebData(string url) {
+    public IEnumerator catchWebData(ShowWebInfo obj,string url) {
         WWW web = new WWW(webUrl + url);
         yield return web;
-        Debug.Log("Download OK!!");
+        Debug.Log("Download OK!!" + web.text);
+        if (!obj.Equals(null)) { obj.show(web.text); }
+        
     }
-
+    
     public bool isFileExist(string path) {
         return File.Exists(Path.Combine(PathBase, path));
     }

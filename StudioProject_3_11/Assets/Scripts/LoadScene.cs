@@ -14,22 +14,26 @@ public class LoadScene : MonoBehaviour {
     {
         Application.LoadLevel(0);
     }
-    public void enterOnlineBattleScene()
-    {
+    public void enterMainScene() {
         Application.LoadLevel(1);
     }
-    public void enterEditDeckScene()
+    public void enterOnlineBattleScene()
     {
         Application.LoadLevel(2);
     }
-    public void enterBagScene()
+    public void enterEditDeckScene()
     {
         Application.LoadLevel(3);
     }
-    public void enterTextField()
+    public void enterBagScene()
     {
         Application.LoadLevel(4);
     }
+    public void enterTextField()
+    {
+        Application.LoadLevel(5);
+    }
+
     public void changeEventSystemStatus()
     {
         if (eventSystemActivate)

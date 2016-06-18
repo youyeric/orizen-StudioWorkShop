@@ -778,6 +778,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 655321828}
   - 114: {fileID: 655321827}
+  - 114: {fileID: 655321829}
   m_Layer: 0
   m_Name: AccountController
   m_TagString: Untagged
@@ -799,8 +800,9 @@ MonoBehaviour:
   accountID: 
   accountName: 
   checkButton: {fileID: 340832143}
-  ID: {fileID: 2122190228}
-  Password: {fileID: 964099843}
+  viewBase: {fileID: 538184382}
+  ID: {fileID: 824829907}
+  Passwd: {fileID: 1859497997}
 --- !u!4 &655321828
 Transform:
   m_ObjectHideFlags: 0
@@ -813,6 +815,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &655321829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 655321826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0557f67cdbdbd8548b8e219b800b6cae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &768169239
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,8 +1305,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1859497998}
   m_TextComponent: {fileID: 964099843}
   m_Placeholder: {fileID: 597182114}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

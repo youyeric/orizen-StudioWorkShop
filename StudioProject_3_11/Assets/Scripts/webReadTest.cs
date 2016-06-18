@@ -9,7 +9,7 @@ public class webReadTest : MonoBehaviour {
 	void Start () {
          
         MyCard cd = new MyCard();
-        StartCoroutine(cd.catchWebData("selectCard.php"));
+        //StartCoroutine(cd.catchWebData("selectCard.php"));
          MyCard javascriptwriteTest = new MyCard();
          javascriptwriteTest.loadCard("getEffec.txt");
          javascriptwriteTest.writeJS(this.gameObject,"GetEffect.cs");
@@ -32,7 +32,7 @@ public class webReadTest : MonoBehaviour {
         StartCoroutine(WaitForRequest(www));
         return www;
     }
-    private IEnumerator WaitForRequest(WWW www)
+    public IEnumerator WaitForRequest(WWW www)
     {
         yield return www;
 
