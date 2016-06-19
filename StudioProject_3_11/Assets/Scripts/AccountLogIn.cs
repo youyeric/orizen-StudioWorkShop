@@ -26,7 +26,9 @@ public class AccountLogIn : MonoBehaviour,ShowWebInfo {
             cd.loadCard("account.txt");
             //accountID = cd.getCard(0)[0];
             //accountName = cd.getCard(0)[1];
-            acct.setAccountId(cd.getCard(0)[0]);
+            acct.setAccountId(cd.yourCard[0][0]);
+           // Debug.Log(cd.yourCard[0][2]);
+            acct.setAccountLevel(cd.yourCard[0][2]);
             //跳轉遊戲主畫面
             ls.enterMainScene();
         }
@@ -59,14 +61,25 @@ public class AccountLogIn : MonoBehaviour,ShowWebInfo {
         GameObject pbase = view.createPanel("LoginSuccess", viewBase.transform, 500, 200, 0, 0, "MessageBox");
         view.createText("LoginSuccessText",pbase.transform,-50 ,50, 500, 50, info, 30, Color.green);
         //把資料傳給AccountModel Account.cs
-        acct.setAccountId(info.Split(' ')[2]);
+        acct.setAccountLevel(info.Split(' ')[2]);
+        acct.setAccountCardData(info.Split(' ')[0]);
+        acct.setAccountId(info.Split(' ')[5]);
         Debug.Log(acct.accountID);
         //把資料存在account.txt
-        cd.saveCard("account.txt", ID.text + "," + Passwd.text, false);
+        cd.saveCard("account.txt", ID.text + "," + Passwd.text + "," + acct.accountLevel, false);
         //跳轉
         ls.enterMainScene();
 
     }
+    /*void dealCardDownload(string data) {
+        var datas = data.Split(',');
+        foreach(string d in datas)
+        {
+            var ds = d.Split('/');
+            StartCoroutine(cd.catchWebData(this, "selectCard.php?num=" + ds[ds.Length - 1]));
+        }
+        
+    }*/
     void failView() {
         GameObject pbase = view.createPanel("Loginfail", viewBase.transform, 500, 200, 0, 0, "MessageBox");
         view.createText("LoginFailText", pbase.transform, -30, 50, 500, 50, "Login Failed!! Check your Id and Password.", 20, Color.green);

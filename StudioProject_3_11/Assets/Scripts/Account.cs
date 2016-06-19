@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-
+using System;
 
 public class Account : MonoBehaviour{
     public string accountID;
@@ -29,6 +28,14 @@ public class Account : MonoBehaviour{
     public void setAccountId(string id) {
         this.accountID = id;
     }
+    public void setAccountCardData(string data)
+    {
+        this.accountCard = data;
+    }
+    public void setAccountLevel(string level)
+    {
+        this.accountLevel = level;
+    }
     public void updateAccountCard() {
         
     }
@@ -36,4 +43,5 @@ public class Account : MonoBehaviour{
        StartCoroutine(dataHandle.catchWebData(null, "UpdateData.php?data =" + accountLevel));
     }
 
+  
 }

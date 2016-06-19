@@ -61,7 +61,7 @@ public class MyCard {
     public IEnumerator catchWebData(ShowWebInfo obj,string url) {
         WWW web = new WWW(webUrl + url);
         yield return web;
-        Debug.Log("Download OK!!" + web.text);
+        Debug.Log("Download OK!!"+ webUrl + url + web.text);
         if (!obj.Equals(null)) { obj.show(web.text); }
         
     }

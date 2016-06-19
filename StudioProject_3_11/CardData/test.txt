@@ -1,9 +1,0 @@
-#pragma strict
-
-function Start () {
-    Debug.Log("hello");
-}
-
-function Update () {
-
-}

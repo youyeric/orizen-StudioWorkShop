@@ -48,6 +48,7 @@ public class Effect : MonoBehaviour {
                 if (System.Int32.Parse(this.gameController.GetComponent<CardData>().cm.cardLifePoint) <= 0)
                 {
                     when(setcmd(cm));
+                    eventList.Remove(cmd);
                 }
             }
         }

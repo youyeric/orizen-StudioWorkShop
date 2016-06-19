@@ -94,6 +94,7 @@
     <Compile Include="Assets\Scripts\GameProcessControll.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\MyCard.cs" />
+    <Compile Include="Assets\Scripts\TeachModel.cs" />
     <Compile Include="Assets\Scripts\Temp.cs" />
     <Compile Include="Assets\Scripts\TileMouseOver.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
