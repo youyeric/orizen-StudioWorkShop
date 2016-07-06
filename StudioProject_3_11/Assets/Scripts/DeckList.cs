@@ -15,8 +15,10 @@ public class DeckList : MonoBehaviour {
         cardAlbum = new MyCard();
         deckList = new MyCard();
         deckList.loadCard("addDeckToList.csv");
+        cardAlbum.loadCard("bag.csv");
         uic = new UICreator(5);
         callDeckList();
+        callDeckContent();
     }
     public void callDeckList()
     {
@@ -60,6 +62,30 @@ public class DeckList : MonoBehaviour {
                 delete.GetComponent<Button>().onClick.AddListener(delegate { delete.GetComponent<Temp>().destroyParents(); });
                 i++;
             }
+        }
+    }
+    public void callDeckContent()
+    {
+        int i = 0;
+        RectTransform tranRect = deckContentContent.GetComponent<RectTransform>();
+        float height = 0;
+        int width = 320;
+        float posY;
+        float posX = -128.5f;
+        foreach (string[] data in cardAlbum.yourCard)
+        {
+            height += 130.7f;
+        }
+        if (height <= 410)
+        {
+            height = 410;
+        }
+        tranRect.sizeDelta = new Vector2(width, height / 4 + 130.7f);
+        posY = (height / 4 + 130.7f) / 2 - 55;
+        foreach (string[] data in cardAlbum.yourCard)
+        {
+            uic.createImage("DeckContent" + i, deckContentContent.gameObject.transform, new Vector2(63, 108), new Vector2(posX + (85.7f * (i % 4)), posY - 130.7f * (i / 4)), data[9]);
+            i++;
         }
     }
     public void reLoadScene()

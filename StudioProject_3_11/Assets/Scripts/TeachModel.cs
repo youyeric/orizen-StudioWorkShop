@@ -26,11 +26,16 @@ public class TeachModel : MonoBehaviour, ShowWebInfo
         pbase = uic.createPanel("teachModel", viewBase.transform, 750, 200, 0, 0, "MessageBox");
         uic.createText("text", pbase.transform, -30, 50, 500, 50, "教學完成", 20, Color.green);
         uic.createButton("checkButton", pbase.transform, new Vector2(0, 0), new Vector2(100, 20), "Check", 14, Color.white, "button", delegate { Destroy(GameObject.Find("teachModel")); });
+        acct.updateAccountLevel();
     }
 
     public void show(string info)
     {
         acct.accountCard = info.Split(' ')[0];
         this.GetComponent<ShowMainPage>().downLoadCardData();
+        teacherSuccess();
+        this.GetComponent<ShowMainPage>().AccountLevel.text = acct.accountLevel;
+        this.GetComponent<ShowMainPage>().openBagLock();
+        this.GetComponent<ShowMainPage>().upDateLevel();
     }
 }

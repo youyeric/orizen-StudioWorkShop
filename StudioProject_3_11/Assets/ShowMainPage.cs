@@ -47,10 +47,19 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
     }
     public void downLoadCardData() {
         var datas = acct.accountCard.Split('/');
+        string temp = "";
+        model.saveCard("addDeckToList.csv", "卡冊(所有卡片),", false);
         foreach (string data in datas)
         {
             var ds = data.Split(',');
             StartCoroutine(model.catchWebData(this, "selectCard.php?num=" + ds[0] + "&album=" + ds[1]));
+            //儲存牌組庫
+            //過濾重複的牌組名稱
+            if (!temp.Equals(ds[1]))
+            {
+                model.saveCard("addDeckToList.csv", ds[1] + ",", true);
+                temp = ds[1];
+            }
             index++;
         }
     }
@@ -75,11 +84,18 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
         }
         
     }
-    public void beTeach() {
-        acct.accountLevel = (Int32.Parse(acct.accountLevel)+1).ToString();
-        AccountLevel.text = "Level  " + acct.accountLevel;
-        ta.teacherSuccess();
+    public void beTeach() {            
         StartCoroutine(model.catchWebData(ta, "Login.php?accountId=Teacher&passWord=teacher"));
+       // ta.teacherSuccess();
+        //AccountLevel.text = "Level  " + acct.accountLevel;
+        //openBagLock();
         //downLoadCardData();
+    }
+    public void upDateLevel() {
+        AccountLevel.text = "Level  " + acct.accountLevel;
+        openBagLock();
+        StartCoroutine(model.pushWebData("UpdateData.php?tname=Accounts&cname=AccountLevel&data=" + acct.accountLevel + "&conditionT=Account_Name&conditionV=" + acct.accountID));
+        StartCoroutine(model.pushWebData("UpdateData.php?tname=Accounts&cname=Account_beg&data=" + acct.accountCard + "&conditionT=Account_Name&conditionV=" + acct.accountID));
+        Debug.Log(acct.accountCard);
     }
 }

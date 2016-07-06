@@ -4,6 +4,7 @@ using System;
 
 public class Account : MonoBehaviour{
     public string accountID;
+    public string accountPassword;
     public string accountLevel;
     public string accountCard;
     private static Account yourAccount = new Account();
@@ -40,8 +41,15 @@ public class Account : MonoBehaviour{
         
     }
     public void updateAccountLevel() {
-       StartCoroutine(dataHandle.catchWebData(null, "UpdateData.php?data =" + accountLevel));
+        int temp = Int32.Parse(this.accountLevel) + 1;
+        this.accountLevel = temp.ToString();
+         
+        dataHandle.saveCard("account.txt",this.accountID+","+this.accountPassword+","+this.accountLevel, false);
+        Debug.Log("UpdateData.php?tname=Accounts&cname=AccountLevel&data=" + accountLevel + "&conditionT=Account_Name&conditionV=" + accountID);
+        //UpdateToWeb();
+    }
+    void UpdateToWeb(){
+        StartCoroutine(dataHandle.pushWebData("UpdateData.php?tname=Accounts&cname=AccountLevel&data=" + accountLevel + "&conditionT=Account_Name&conditionV=" + accountID));
     }
 
-  
 }

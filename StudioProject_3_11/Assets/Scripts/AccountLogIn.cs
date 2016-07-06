@@ -21,13 +21,16 @@ public class AccountLogIn : MonoBehaviour,ShowWebInfo {
         cd = new MyCard();
         acct = Account.getAccountInstance;
         ls = this.GetComponent<LoadScene>();
+        
+        Debug.Log("UpdateData.php?tname=Accounts&cname=AccountLevel&data=2&conditionT=Account_Name&conditionV=youyeric");
         if (cd.isFileExist("account.txt"))
         {
             cd.loadCard("account.txt");
             //accountID = cd.getCard(0)[0];
             //accountName = cd.getCard(0)[1];
             acct.setAccountId(cd.yourCard[0][0]);
-           // Debug.Log(cd.yourCard[0][2]);
+            acct.accountPassword = cd.yourCard[0][0];
+           Debug.Log(cd.yourCard[0][2]);
             acct.setAccountLevel(cd.yourCard[0][2]);
             //跳轉遊戲主畫面
             ls.enterMainScene();

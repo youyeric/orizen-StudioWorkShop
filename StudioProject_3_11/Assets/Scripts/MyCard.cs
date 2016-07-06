@@ -65,7 +65,12 @@ public class MyCard {
         if (!obj.Equals(null)) { obj.show(web.text); }
         
     }
-    
+    public IEnumerator pushWebData(string url)
+    {
+        WWW web = new WWW(webUrl + url);
+        yield return web;
+        Debug.Log("Download OK!!" + webUrl + url + web.text);
+    }
     public bool isFileExist(string path) {
         return File.Exists(Path.Combine(PathBase, path));
     }
