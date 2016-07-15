@@ -9,6 +9,8 @@ public class DeckList : MonoBehaviour {
     GameObject deckContentContent;
     GameObject deckListContent;
     GameObject temp;
+    private Vector2 DeckSize = new Vector2(0, 320);
+
     void Start () {
         deckContentContent = GameObject.Find("DeckContentContent");
         deckListContent = GameObject.Find("DeckListContent");
@@ -24,8 +26,8 @@ public class DeckList : MonoBehaviour {
     {
         int i = 0;
         RectTransform tranRect = deckListContent.GetComponent<RectTransform>();
-        float height = 0;
-        int width = 320;
+        float height = DeckSize.x;
+        int width = (int)DeckSize.y;
         float posY;
         float posX = 0;
         foreach (string[] data in deckList.yourCard)
@@ -96,5 +98,8 @@ public class DeckList : MonoBehaviour {
             deckList.saveCard("addDeckToList.csv", deckList.getCard(i)[0], true);
         }
         this.GetComponent<LoadScene>().enterBagScene();
+    }
+    public void showYouSelectAlbum(Text Album) {
+
     }
 }
