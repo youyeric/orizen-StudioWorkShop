@@ -88,12 +88,15 @@
     <Compile Include="Assets\Scripts\CardSelected.cs" />
     <Compile Include="Assets\Scripts\CreateTile.cs" />
     <Compile Include="Assets\Scripts\DDoption.cs" />
+    <Compile Include="Assets\Scripts\DeckAlbumSelect.cs" />
     <Compile Include="Assets\Scripts\DeckList.cs" />
+    <Compile Include="Assets\Scripts\EditCardAlbum.cs" />
     <Compile Include="Assets\Scripts\Effect.cs" />
     <Compile Include="Assets\Scripts\ForTile.cs" />
     <Compile Include="Assets\Scripts\GameProcessControll.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\MyCard.cs" />
+    <Compile Include="Assets\Scripts\SwitchListContent.cs" />
     <Compile Include="Assets\Scripts\TeachModel.cs" />
     <Compile Include="Assets\Scripts\Temp.cs" />
     <Compile Include="Assets\Scripts\TileMouseOver.cs" />

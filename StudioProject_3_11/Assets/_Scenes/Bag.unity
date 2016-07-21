@@ -249,6 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7c34d38f1951b45915d16a055e7481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AlbuName: {fileID: 0}
+  cardName: {fileID: 0}
 --- !u!1 &160565789
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +399,7 @@ GameObject:
   - 222: {fileID: 344113501}
   - 114: {fileID: 344113500}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DeckListTabText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -449,7 +451,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u724C\u7D44\u5217\u8868"
@@ -664,7 +666,7 @@ GameObject:
   - 222: {fileID: 705628644}
   - 114: {fileID: 705628643}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DeckContentTabText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1030,7 +1032,7 @@ GameObject:
   - 222: {fileID: 1267752554}
   - 114: {fileID: 1267752553}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AddNewDeckText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

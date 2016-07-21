@@ -9,14 +9,14 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
     private Account acct;
     private MyCard model;
     public GameObject bag, connectBattle;
-    private int index;
+    private static int index;
     Texture2D origin;
     TeachModel ta;
     // Use this for initialization
     void Start() {
         Texture2D tex = Resources.Load<Texture2D>("button_lock");
         origin = Resources.Load<Texture2D>("button");
-        index = 0;
+       
         acct = Account.getAccountInstance;
         AccountId.text = acct.accountID;
         AccountLevel.text = "Level  " + acct.accountLevel;
@@ -30,6 +30,7 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
         }
 
         model = new MyCard();
+        index = model.yourCard.Count;
         if (model.isFileExist("bag.csv"))
         {
             Debug.Log("hello");
@@ -60,7 +61,6 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
                 model.saveCard("addDeckToList.csv", ds[1] + ",", true);
                 temp = ds[1];
             }
-            index++;
         }
     }
     public void openBagLock() {
@@ -73,16 +73,8 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
     }
         
     public void show(string info)
-    {
-        if(index == 0)
-        {
-            model.saveCard("bag.csv", info, false);
-        }
-        else
-        {
-            model.saveCard("bag.csv", info, true);
-        }
-        
+    {          
+        model.saveCard("bag.csv", "bagcard" + this.addIndex().ToString() + "," + info, true);       
     }
     public void beTeach() {            
         StartCoroutine(model.catchWebData(ta, "Login.php?accountId=Teacher&passWord=teacher"));
@@ -97,5 +89,8 @@ public class ShowMainPage : MonoBehaviour, ShowWebInfo
         StartCoroutine(model.pushWebData("UpdateData.php?tname=Accounts&cname=AccountLevel&data=" + acct.accountLevel + "&conditionT=Account_Name&conditionV=" + acct.accountID));
         StartCoroutine(model.pushWebData("UpdateData.php?tname=Accounts&cname=Account_beg&data=" + acct.accountCard + "&conditionT=Account_Name&conditionV=" + acct.accountID));
         Debug.Log(acct.accountCard);
+    }
+    public int addIndex() {
+      return  index++;
     }
 }

@@ -21,6 +21,7 @@ public class MyCard {
         r = new System.Random();
         this.i = 0;
         yourCard = new List<string[]>();
+        
         this.PathBase = Path.Combine(System.Environment.CurrentDirectory, "CardData");
         //this.PathBase = Application.persistentDataPath;
         this.webUrl = "http://studiogame-orizen.rhcloud.com/";
@@ -74,7 +75,7 @@ public class MyCard {
     public bool isFileExist(string path) {
         return File.Exists(Path.Combine(PathBase, path));
     }
-    public void writeJS(GameObject g, string path)
+  /*  public void writeJS(GameObject g, string path)
     {
         for (int i = 0; i < yourCard.Count; i++)
         {
@@ -95,7 +96,7 @@ public class MyCard {
             data = null;
         }
         // g.AddComponent<GetEffect>();
-    }
+    }*/
     public void saveScript(string path, string Data, FileMode fm)
     {
         FileStream fs = new FileStream(System.Environment.CurrentDirectory + "/Assets/" + path, fm);
@@ -114,6 +115,150 @@ public class MyCard {
             i++;
         }
         return i;
+    }
+    public List<string[]> cardSelectByAlbum(string album) {
+        List<string[]> temp = new List<string[]>();
+        
+        foreach (string[] data in yourCard) {
+            var albums = data[11].Split('|');
+            foreach (string al in albums) {
+                if (al.Equals(album))
+                {
+                    Debug.Log("add" + album);
+                    temp.Add(data);
+                }
+            }
+        }
+        return temp;
+    }
+    public List<string[]> cardSelectByAlbumRemain(string album) {
+        List<string[]> temp = new List<string[]>();
+
+        foreach (string[] data in yourCard)
+        {
+            var albums = data[11].Split('|');
+            int i = 0;
+            foreach (string al in albums)
+            {
+                if (al.Equals(album)) {
+                    i++;
+                }
+            }
+            if (i == 0) {
+                temp.Add(data);
+            }
+        }
+        return temp;
+    }
+    public void restoreData(string path) {
+        string temp = "";
+        for(int i = 0; i < this.yourCard.Count; i++)
+        {
+            foreach (string data in yourCard[i]) {
+                temp = temp + data + ",";
+            }
+            this.saveCard(path, temp, (i>0)?true:false);
+            temp = "";
+        }
+    }
+    public void addCardAlbum(string card, string album) {
+        List<string[]> tempdata = this.cardSelectByAlbum(card);
+        List<string> savedata = new List<string>();
+        for (int i = 0; i < tempdata.Count; i++)
+        {
+            var albums = tempdata[i][11].Split('|');
+            int j = 0;
+            foreach (string al in albums) {
+                if (al.Equals(album))
+                {
+                    j++;
+                }
+            }
+            if(j == 0)
+            {
+                savedata.Add(yourCard[i][0] + "," + yourCard[i][1] + "," + yourCard[i][2] + "," + yourCard[i][3] + "," + yourCard[i][4] + "," + yourCard[i][5] + "," + yourCard[i][6] + "," + yourCard[i][7] + "," + yourCard[i][8] + "," + yourCard[i][9] + "," + yourCard[i][10] + ","+yourCard[i][11]+"|"+album);
+            }
+        }
+
+        this.saveMultiData(savedata, "bag.csv");
+    }
+    public void removeCardAlbum(string album) {
+        string temp = "";
+        List<string> tempdata = new List<string>();
+        Debug.Log(yourCard.Count);
+        for (int i = 0; i < yourCard.Count;i++)
+        {
+            temp = yourCard[i][0] + "," + yourCard[i][1] + "," + yourCard[i][2] + "," + yourCard[i][3] + "," + yourCard[i][4] + "," + yourCard[i][5] + "," + yourCard[i][6] + "," + yourCard[i][7] + "," + yourCard[i][8] + "," + yourCard[i][9] + "," + yourCard[i][10] + ",";
+            var albums = yourCard[i][11].Split('|');
+            for(int j = 0; j < albums.Length; j++)
+            {
+                if (!albums[j].Equals(album))
+                {
+                    temp += "|"+albums[j];
+                }
+            }
+            tempdata.Add(temp);
+            Debug.Log(temp);
+        }
+        this.saveMultiData(tempdata,"bag.csv");
+    }
+    public void saveMultiData(List<string> data, string path) {
+        for(int i = 0; i < data.Count; i++)
+        {
+            this.saveCard(path, data[i], (i > 0) ? true : false);
+        }
+    }
+    public void saveAllCard(string path){
+        string temp = "";
+        for(int i = 0; i<yourCard.Count; i++)
+        {
+            temp = yourCard[i][0] + "," + yourCard[i][1] + "," + yourCard[i][2] + "," + yourCard[i][3] + "," + yourCard[i][4] + "," + yourCard[i][5] + "," + yourCard[i][6] + "," + yourCard[i][7] + "," + yourCard[i][8] + "," + yourCard[i][9] + "," + yourCard[i][10] + ","+yourCard[i][11];
+            this.saveCard(path, temp, (i > 0) ? true : false);
+        }
+    }
+    public List<string[]> cardSelectByBagId(string ids) {
+        List<string[]> temp = new List<string[]>();
+        var idss = ids.Split(',');
+        foreach(string[] data in yourCard)
+        {
+            foreach (string id in idss)
+            {
+                if (data[0].Equals(id))
+                {
+                    temp.Add(data);
+                }
+            }            
+        }
+        return temp;
+    }
+    public void removeOneCardAlbumByBagId(string id, string album) {
+        string temp="";
+        for(int i = 0; i< yourCard.Count; i++)
+        {
+            if (yourCard[i][0].Equals(id))
+            {
+                var albums = yourCard[i][11].Split('|');
+                foreach (string al in albums)
+                {
+                    if (!al.Equals(album))
+                    {
+                        temp += "|" + al;
+                    }
+                }
+                yourCard[i][11] = temp;
+                Debug.Log(yourCard[i][0] + " " + yourCard[i][11]);
+            }
+        }
+    }
+    public void addOneCardAlbumByBagId(string id, string album) {
+        for (int i = 0; i < yourCard.Count; i++)
+        {
+            if (yourCard[i][0].Equals(id))
+            {
+                yourCard[i][11] += "|" + album;
+                Debug.Log(yourCard[i][0] + " " + yourCard[i][11]);
+            }
+        }
     }
     /* void startGetCard()
      {

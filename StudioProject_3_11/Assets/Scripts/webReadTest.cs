@@ -12,7 +12,7 @@ public class webReadTest : MonoBehaviour {
         //StartCoroutine(cd.catchWebData("selectCard.php"));
          MyCard javascriptwriteTest = new MyCard();
          javascriptwriteTest.loadCard("getEffec.txt");
-         javascriptwriteTest.writeJS(this.gameObject,"GetEffect.cs");
+         //javascriptwriteTest.writeJS(this.gameObject,"GetEffect.cs");
 
     }
 	
