@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using NLua;
 
-public class DeckList : MonoBehaviour {
+public class DeckList : MonoBehaviour
+{
+    Lua env;
     public MyCard cardAlbum, deckList;
     UICreator uic;
     GameObject deckContentContent;
@@ -13,8 +16,10 @@ public class DeckList : MonoBehaviour {
     public Text AlbuName;
     public Text cardName;
     private Vector2 DeckSize = new Vector2(0, 320);
+    
 
-    void Start() {
+    void Start()
+    {
         deckbutton = new List<GameObject>();
         deckContentContent = GameObject.Find("DeckContentContent");
         deckListContent = GameObject.Find("DeckListContent");
@@ -27,20 +32,18 @@ public class DeckList : MonoBehaviour {
         uic = new UICreator(5);
         callDeckList();
         callDeckContent(deckContentContent.gameObject.transform, "default");
-        
+        addCardSelectInterface();
     }
     public void callDeckList()
     {
         int i = 0;
         RectTransform tranRect = deckListContent.GetComponent<RectTransform>();
-        float height = DeckSize.x;
+       
         int width = (int)DeckSize.y;
         float posY;
         float posX = 0;
-        foreach (string[] data in deckList.yourCard)
-        {
-            height += 65f;
-        }
+        float height = DeckSize.x + deckList.yourCard.Count*65f;
+
         if (height <= 410)
         {
             height = 410;
@@ -51,16 +54,16 @@ public class DeckList : MonoBehaviour {
         {
             if (i == 0)
             {
-                uic.createButton(data[0], deckListContent.gameObject.transform, new Vector2(posX, posY - 65 * i), new Vector2(320, 60), data[0], 25, Color.white, "decklist", delegate { resetDeckContentContent(); callDeckContent(deckContentContent.gameObject.transform, "default"); Debug.Log("push it!!"); });
-               
+                uic.createButton(data[0], deckListContent.gameObject.transform, new Vector2(posX, posY - 65 * i), new Vector2(320, 60), data[0], 25, Color.white, "decklist", delegate { resetDeckContentContent(); callDeckContent(deckContentContent.gameObject.transform, "default"); addCardSelectInterface(); Debug.Log("push it!!"); });
+
                 i++;
             }
             else
             {
-               temp = uic.createButton(data[0], deckListContent.gameObject.transform, new Vector2(posX, posY - 65 * i), new Vector2(320, 60), data[0], 25, Color.white, "decklist", delegate { resetDeckContentContent(); });
-               DeckAlbumSelect deckTemp = temp.AddComponent<DeckAlbumSelect>();
+                temp = uic.createButton(data[0], deckListContent.gameObject.transform, new Vector2(posX, posY - 65 * i), new Vector2(320, 60), data[0], 25, Color.white, "decklist", delegate { resetDeckContentContent(); });
+                DeckAlbumSelect deckTemp = temp.AddComponent<DeckAlbumSelect>();
                 deckTemp.objectname = data[0];
-                
+
                 GameObject edit = uic.createButton(data[0] + "Edit", GameObject.Find(data[0]).gameObject.transform, new Vector2(130, 0), new Vector2(50, 50), "編輯", 18, Color.white, "button", delegate { });
                 EditCardAlbum editcardalb = edit.AddComponent<EditCardAlbum>();
                 editcardalb.albumName = data[0];
@@ -74,40 +77,37 @@ public class DeckList : MonoBehaviour {
             }
         }
     }
-    public void callDeckContent(Transform tr,string Album)
+    public void callDeckContent(Transform tr, string Album)
     {
         int i = 0;
         RectTransform tranRect = deckContentContent.GetComponent<RectTransform>();
-        float height = DeckSize.x;
+        float height = DeckSize.x + cardAlbum.yourCard.Count*130.7f;
         int width = (int)DeckSize.y;
         float posY;
         float posX = -128.5f;
-        foreach (string[] data in cardAlbum.yourCard)
-        {
-            height += 130.7f;
-        }
         if (height <= 410)
         {
             height = 410;
         }
         tranRect.sizeDelta = new Vector2(width, height / 4 + 130.7f);
         posY = (height / 4 + 130.7f) / 2 - 55;
-        if (Album.Equals("default")) {
+        if (Album.Equals("default"))
+        {
             foreach (string[] data in cardAlbum.yourCard)
             {
                 uic.createImage(data[0], tr, new Vector2(63, 108), new Vector2(posX + (85.7f * (i % 4)), posY - 130.7f * (i / 4)), data[10]);
                 i++;
             }
         }
-         else if (Album.Equals("remain"))
-         {
+        else if (Album.Equals("remain"))
+        {
             Debug.Log(AlbuName.text);
-             foreach (string[] data in cardAlbum.cardSelectByAlbumRemain(AlbuName.text))
-             {
-                 uic.createImage(data[0], tr, new Vector2(63, 108), new Vector2(posX + (85.7f * (i % 4)), posY - 130.7f * (i / 4)), data[10]);
-                 i++;
-             }
-         }
+            foreach (string[] data in cardAlbum.cardSelectByAlbumRemain(AlbuName.text))
+            {
+                uic.createImage(data[0], tr, new Vector2(63, 108), new Vector2(posX + (85.7f * (i % 4)), posY - 130.7f * (i / 4)), data[10]);
+                i++;
+            }
+        }
         else
         {
             List<string[]> datas = cardAlbum.cardSelectByAlbum(Album);
@@ -128,28 +128,34 @@ public class DeckList : MonoBehaviour {
         }
         this.GetComponent<LoadScene>().enterBagScene();
     }
-    public void resetDeckContentContent() {
-        foreach (Transform child in deckContentContent.transform) {
+    public void resetDeckContentContent()
+    {
+        foreach (Transform child in deckContentContent.transform)
+        {
             GameObject.Destroy(child.gameObject);
         }
     }
-    public void resetDeckListContent() {
-        foreach (Transform child in deckListContent.transform) {
+    public void resetDeckListContent()
+    {
+        foreach (Transform child in deckListContent.transform)
+        {
             GameObject.Destroy(child.gameObject);
         }
     }
-    public void switchListContent(GameObject g) {
+    public void switchListContent(GameObject g)
+    {
         if (g.transform.parent.name.Equals("DeckContentContent"))
         {
             g.transform.SetParent(deckListContent.gameObject.transform);
-            int children = deckListContent.gameObject.transform.childCount -1;
+            int children = deckListContent.gameObject.transform.childCount - 1;
             int elementCount = cardAlbum.yourCard.Count;
-            g.GetComponent<RectTransform>().anchoredPosition = new Vector2(-128.5f +(85.7f * (children % 4)), (((DeckSize.x+(130.7f*elementCount)) / 4 + 130.7f) / 2 - 55) - 130.7f * (children / 4));
+            g.GetComponent<RectTransform>().anchoredPosition = new Vector2(-128.5f + (85.7f * (children % 4)), (((DeckSize.x + (130.7f * elementCount)) / 4 + 130.7f) / 2 - 55) - 130.7f * (children / 4));
             //add           
             cardAlbum.addOneCardAlbumByBagId(g.name, AlbuName.text);
             restructedContent();
         }
-        else {
+        else
+        {
             g.transform.SetParent(deckContentContent.gameObject.transform);
             int children = deckContentContent.gameObject.transform.childCount - 1;
             int elementCount = cardAlbum.yourCard.Count;
@@ -159,7 +165,8 @@ public class DeckList : MonoBehaviour {
             restructedList();
         }
     }
-    public void restructedContent() {
+    public void restructedContent()
+    {
         int i = 0;
         int elementCount = cardAlbum.yourCard.Count;
         foreach (Transform child in deckContentContent.transform)
@@ -178,13 +185,20 @@ public class DeckList : MonoBehaviour {
             i++;
         }
     }
-    public void addSwitchEvent() {
-        foreach (Transform child in deckContentContent.transform) {
-            child.gameObject.AddComponent<SwitchListContent>();
-        }
-        foreach(Transform child in deckListContent.transform)
+    public void addSwitchEvent()
+    {
+        foreach (Transform child in deckContentContent.transform)
         {
             child.gameObject.AddComponent<SwitchListContent>();
+        }
+        foreach (Transform child in deckListContent.transform)
+        {
+            child.gameObject.AddComponent<SwitchListContent>();
+        }
+    }
+    public void addCardSelectInterface() {
+        foreach (Transform child in deckContentContent.transform) {
+            child.gameObject.AddComponent<BagCardSelected>();
         }
     }
     public void editCardAlbumView(string album) {

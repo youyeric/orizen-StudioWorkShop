@@ -17,5 +17,6 @@ public class DeckAlbumSelect : MonoBehaviour {
     public void selectAlbum() {
         DeckList dl = controller.GetComponent<DeckList>();
         dl.callDeckContent(GameObject.Find("DeckContentContent").gameObject.transform, objectname);
+        dl.addCardSelectInterface();
     }
 }
